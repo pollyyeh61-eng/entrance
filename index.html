@@ -3,70 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITALITY | 美業入口平台</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
+    <title>VITALITY | 頂級美學入口</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
             --gold-gradient: linear-gradient(45deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
-            --dark-bg: #0a0a0a;
+            --dark-bg: #050505;
         }
-        body { background-color: var(--dark-bg); color: #fff; font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--dark-bg); color: #fff; font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
+        
+        /* 流金文字與動畫 */
         .gold-text { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: 'Playfair Display', serif; }
-        .gold-border-btn { border: 1px solid #BF953F; transition: all 0.4s; }
-        .gold-border-btn:hover { background: var(--gold-gradient); color: #000; box-shadow: 0 0 20px rgba(191, 149, 63, 0.6); }
-        #map { height: 550px; width: 100%; border-top: 1px solid #333; border-bottom: 1px solid #333; filter: grayscale(1) invert(0.9) contrast(1.2); }
-        .gold-line { height: 2px; background: var(--gold-gradient); width: 80px; margin: 1rem auto; }
+        
+        /* 奢華流金按鈕 */
+        .gold-border-btn { 
+            border: 1px solid #BF953F; 
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            letter-spacing: 0.2em;
+        }
+        .gold-border-btn:hover { 
+            background: var(--gold-gradient); 
+            color: #000; 
+            box-shadow: 0 0 30px rgba(191, 149, 63, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* 裝飾線條 */
+        .gold-line { height: 1px; background: var(--gold-gradient); width: 100px; margin: 2rem auto; opacity: 0.6; }
+
+        /* 背景流光裝飾 */
+        .bg-glow {
+            position: absolute;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, rgba(170, 119, 28, 0.1) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            filter: blur(50px);
+        }
+
+        /* 圖片懸停效果 */
+        .img-container img { transition: transform 0.8s ease; }
+        .img-container:hover img { transform: scale(1.1); }
     </style>
 </head>
 <body>
 
-    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10 px-6 py-4 flex justify-between items-center">
-        <div class="text-2xl gold-text tracking-widest">VITALITY</div>
-        <div class="hidden md:flex space-x-8 text-sm tracking-widest text-gray-400">
-            <a href="#map-section" class="hover:text-white transition">週邊探索</a>
-            <a href="#portfolio" class="hover:text-white transition">作品傑作</a>
-            <a href="#booking" class="gold-text">立即預約</a>
+    <div class="bg-glow top-0 left-[-10%]"></div>
+    <div class="bg-glow bottom-0 right-[-10%]"></div>
+
+    <nav class="fixed w-full z-50 bg-black/60 backdrop-blur-lg border-b border-white/5 px-8 py-5 flex justify-between items-center">
+        <div class="text-2xl gold-text font-bold tracking-[0.3em]">VITALITY</div>
+        <div class="hidden md:flex space-x-12 text-[10px] tracking-[0.4em] text-gray-400 uppercase">
+            <a href="#intro" class="hover:text-white transition">關於美學</a>
+            <a href="#portfolio" class="hover:text-white transition">大師傑作</a>
+            <a href="http://booking.hairweb.net" class="gold-text border-b border-gold-500 pb-1">立即預約</a>
         </div>
     </nav>
 
-    <section class="h-screen flex flex-col justify-center items-center text-center px-4">
-        <h1 class="text-5xl md:text-7xl gold-text mb-6">定義極致美學</h1>
-        <div class="gold-line"></div>
-        <p class="text-gray-400 max-w-lg mb-10 leading-relaxed tracking-widest">HOLY HAIR SALON x VITALITY<br>打造專屬於您的奢華數位美髮體驗</p>
-        <a href="#map-section" class="gold-border-btn px-10 py-3 tracking-widest uppercase text-sm">探索地圖</a>
-    </section>
-
-    <section id="map-section" class="py-20">
-        <div class="container mx-auto px-4 mb-10 text-center">
-            <h2 class="text-3xl gold-text mb-4">週邊店家地圖</h2>
-            <div id="map"></div>
+    <section class="h-screen flex flex-col justify-center items-center text-center px-4 relative">
+        <div class="animate-fadeIn">
+            <h2 class="text-[12px] tracking-[0.8em] text-gray-500 mb-8 uppercase">Essential Beauty Experience</h2>
+            <h1 class="text-6xl md:text-8xl gold-text mb-8 italic">Holy Hair Salon</h1>
+            <div class="gold-line"></div>
+            <p class="text-gray-300 max-w-2xl mb-12 text-sm leading-8 tracking-[0.2em] font-light">
+                在這裡，每一根髮絲都是藝術的延展。<br>
+                結合數位智能管理與匠心美學，開啟您的尊榮蛻變之旅。
+            </p>
+            <a href="http://booking.hairweb.net" class="gold-border-btn px-12 py-4 text-xs uppercase inline-block">進入預約系統</a>
         </div>
     </section>
 
-    <section id="portfolio" class="py-20 bg-black">
-        <div class="container mx-auto px-4 text-center mb-16">
-            <h2 class="text-3xl gold-text mb-4">大師作品 Portfolio</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10" id="portfolio-grid">
-                <div class="aspect-square bg-zinc-900 animate-pulse border border-white/5"></div>
-                <div class="aspect-square bg-zinc-900 animate-pulse border border-white/5"></div>
-                <div class="aspect-square bg-zinc-900 animate-pulse border border-white/5"></div>
-                <div class="aspect-square bg-zinc-900 animate-pulse border border-white/5"></div>
+    <section id="intro" class="py-32 container mx-auto px-8 border-t border-white/5">
+        <div class="grid md:grid-cols-2 gap-20 items-center">
+            <div class="img-container relative overflow-hidden rounded-sm border border-white/10 aspect-[4/5]">
+                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200" class="w-full h-full object-cover grayscale-[0.5] hover:grayscale-0">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+            </div>
+            <div class="space-y-10">
+                <h3 class="text-5xl gold-text leading-tight">淬煉工藝<br><span class="text-white text-3xl font-light italic">極致奢華的空間美學</span></h3>
+                <p class="text-gray-400 leading-9 text-sm tracking-widest font-light">
+                    我們深信，美學不應只是視覺的呈現，更是一種生活態度的表達。從踏入 VITALITY 的那一刻起，柔和的光影、頂級的香氛，以及量身定制的專業諮詢，將為您構築一個遠離塵囂的私人聖殿。
+                </p>
+                <div class="space-y-6 pt-4">
+                    <div class="flex items-center space-x-4">
+                        <span class="w-8 h-[1px] bg-[#BF953F]"></span>
+                        <span class="text-xs tracking-[0.3em] text-gray-200">專屬 VIP 私人獨立包廂</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="w-8 h-[1px] bg-[#BF953F]"></span>
+                        <span class="text-xs tracking-[0.3em] text-gray-200">國際資深講師級設計團隊</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="w-8 h-[1px] bg-[#BF953F]"></span>
+                        <span class="text-xs tracking-[0.3em] text-gray-200">選用全球環保頂級髮品</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer id="booking" class="py-20 border-t border-white/10 text-center">
-        <button id="btn-booking" class="gold-border-btn px-16 py-4 text-lg tracking-widest">立即預約服務</button>
-        <p class="mt-10 text-xs text-gray-600">VITALITY HAIR ACADEMY © 2026</p>
+    <section id="portfolio" class="py-32 bg-[#020202]">
+        <div class="container mx-auto px-8 text-center mb-20">
+            <h2 class="text-4xl gold-text mb-6">Masterpieces</h2>
+            <p class="text-gray-500 text-xs tracking-[0.5em] uppercase">大師傑作系列</p>
+        </div>
+        <div class="container mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-10" id="portfolio-grid">
+            <div class="img-container group relative aspect-square overflow-hidden border border-white/5">
+                <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800" class="w-full h-full object-cover opacity-60 group-hover:opacity-100">
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
+                    <span class="text-[10px] tracking-[0.5em] gold-text">查看細節</span>
+                </div>
+            </div>
+            <div class="img-container group relative aspect-square overflow-hidden border border-white/5">
+                <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=800" class="w-full h-full object-cover opacity-60 group-hover:opacity-100">
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
+                    <span class="text-[10px] tracking-[0.5em] gold-text">查看細節</span>
+                </div>
+            </div>
+            <div class="img-container group relative aspect-square overflow-hidden border border-white/5">
+                <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=800" class="w-full h-full object-cover opacity-60 group-hover:opacity-100">
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
+                    <span class="text-[10px] tracking-[0.5em] gold-text">查看細節</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="booking" class="py-40 border-t border-white/5 text-center relative">
+        <div class="max-w-xl mx-auto px-4">
+            <h2 class="text-2xl gold-text mb-8 tracking-[0.3em]">RESERVE YOUR MOMENT</h2>
+            <p class="text-gray-500 text-xs mb-12 leading-loose">預約一個專屬於您的午後，讓我們的工藝為您的獨特增色。</p>
+            <a href="http://booking.hairweb.net" class="gold-border-btn px-20 py-5 text-sm uppercase inline-block">立即線上預約</a>
+        </div>
+        <div class="mt-40 text-[9px] text-gray-700 tracking-[0.8em] uppercase">
+            VITALITY BEAUTY ACADEMY © 2026. LUXURY REDEFINED.
+        </div>
     </footer>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // 您提供的 Firebase 金鑰
         const firebaseConfig = {
             apiKey: "AIzaSyCOhBN9TH3UJSOSx5XVyQ08f_2RUckvXYU",
             authDomain: "holyhairsalon-f73bf.firebaseapp.com",
@@ -78,38 +157,11 @@
             measurementId: "G-JVZSEB13W3"
         };
 
-        // 初始化 Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const db = getFirestore(app);
 
-        // 初始化 Google Map (簡單範例)
-        window.initMap = function() {
-            const defaultPos = { lat: 25.033, lng: 121.564 }; // 暫定座標
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 14,
-                center: defaultPos,
-                disableDefaultUI: true // 隱藏雜亂按鈕以維持簡潔感
-            });
-            new google.maps.Marker({ position: defaultPos, map: map, title: "Holy Hair Salon" });
-        };
-
-        // 模擬從 Firestore 抓取作品 (您未來可以在 Firestore 建立 'portfolio' 集合)
-        async function loadPortfolio() {
-            const grid = document.getElementById('portfolio-grid');
-            // 此處為邏輯示範，若您資料庫已有資料可取消註釋
-            /*
-            const querySnapshot = await getDocs(collection(db, "portfolio"));
-            grid.innerHTML = "";
-            querySnapshot.forEach((doc) => {
-                grid.innerHTML += `<div class="portfolio-item"><img src="${doc.data().url}" class="w-full h-full object-cover"></div>`;
-            });
-            */
-        }
-        loadPortfolio();
+        // 您可以在此處繼續添加 Firebase 抓取作品集的邏輯
     </script>
-    
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_KEY&callback=initMap"></script>
 </body>
 </html>
-
