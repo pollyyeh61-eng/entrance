@@ -178,6 +178,8 @@
     </div>
 
     <script>
+        // 修正點 2: 確保所有 JavaScript 都在 <script> 標籤內
+        
         // 1. 註冊 Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -198,14 +200,14 @@
             document.body.style.overflow = 'auto';
         }
 
-        // 3. 安裝功能核心邏輯
+        // 3. 安裝邏輯
         let deferredPrompt;
         const installBtn = document.getElementById('install-btn');
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            // 只有在手機版且事件觸發時才顯示引導
+            // 手機版顯示引導
             if (window.innerWidth <= 768) {
                 document.getElementById('install-guide').style.display = 'flex';
             }
@@ -223,12 +225,6 @@
                     alert("請點擊瀏覽器下方的『分享』按鈕，然後選擇『加入主畫面』即可完成安裝！");
                 }
             });
-        }
-
-        // 4. 初始隱藏判斷
-        if (window.innerWidth > 768) {
-            const guide = document.getElementById('install-guide');
-            if (guide) guide.style.display = 'none';
         }
     </script>
 </body>
