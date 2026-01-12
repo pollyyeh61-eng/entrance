@@ -204,9 +204,39 @@
             if (guide) guide.style.display = 'none';
         }
     </script>
+let deferredPrompt;
+const installBtn = document.getElementById('install-btn');
 
+// 1. 監聽瀏覽器的安裝提示事件
+window.addEventListener('beforeinstallprompt', (e) => {
+    // 阻止瀏覽器自動彈出預設視窗
+    e.preventDefault();
+    // 將事件存起來
+    deferredPrompt = e;
+    // 顯示您的引導區塊 (原本可能是隱藏的)
+    document.getElementById('install-guide').style.display = 'flex';
+});
+
+// 2. 當使用者點擊您的文字區塊時執行
+installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+        // 彈出安裝對話框
+        deferredPrompt.prompt();
+        // 等待使用者回應
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`使用者選擇了: ${outcome}`);
+        // 執行過後清空，不能重複使用
+        deferredPrompt = null;
+        // 隱藏引導區塊
+        document.getElementById('install-guide').style.display = 'none';
+    } else {
+        // 如果瀏覽器不支持直接觸發 (例如 iOS Safari)
+        alert("請點擊瀏覽器下方的『分享』按鈕，然後選擇『加入主畫面』即可完成安裝！");
+    }
+});
 </body>
 </html>
+
 
 
 
