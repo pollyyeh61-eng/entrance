@@ -2,17 +2,23 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITALITY | 夢幻美學入口</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VITALITY | 門店預約入口</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
             --unicorn-gradient: linear-gradient(45deg, #FF99F1, #A29BFE, #6C5CE7, #81ECEC);
             --dream-bg: #F0F2F8; 
-            --text-dark: #2D3436; 
         }
-        body { background-color: var(--dream-bg); color: var(--text-dark); font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
+        body { 
+            background-color: var(--dream-bg); 
+            color: #2D3436; 
+            font-family: 'Noto Sans TC', sans-serif; 
+            scroll-behavior: smooth; 
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
         
         .unicorn-text { 
             background: var(--unicorn-gradient); 
@@ -22,18 +28,18 @@
             filter: drop-shadow(0 2px 2px rgba(255, 255, 255, 0.8));
         }
         
-        /* 圖形化分類框 */
+        /* WAP 專屬圖形化分類框架 */
         .category-card {
             position: relative;
             overflow: hidden;
             border-radius: 20px;
-            height: 250px;
+            height: 180px; /* 手機端高度優化 */
             display: flex;
             align-items: center;
             justify-content: center;
             border: 4px solid white;
-            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.15);
-            transition: transform 0.4s ease;
+            box-shadow: 0 8px 15px rgba(108, 92, 231, 0.15);
+            margin-bottom: 1rem;
         }
         .category-card img {
             position: absolute;
@@ -41,105 +47,103 @@
             height: 100%;
             object-fit: cover;
             z-index: 1;
-            filter: brightness(0.7);
-            transition: 0.5s;
+            filter: brightness(0.65);
         }
-        .category-card:hover img { filter: brightness(0.9); transform: scale(1.05); }
         .category-card span {
             position: relative;
             z-index: 2;
             color: white;
             font-weight: 900;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             letter-spacing: 0.2em;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
         }
 
         .unicorn-btn { 
             border: 2px solid #6C5CE7; 
             background: white;
             color: #4834D4;
-            transition: all 0.4s ease; 
-            letter-spacing: 0.15em;
-            box-shadow: 0 4px 10px rgba(108, 92, 231, 0.15);
+            letter-spacing: 0.1em;
+            box-shadow: 0 4px 10px rgba(108, 92, 231, 0.2);
             font-weight: 700;
+            text-align: center;
         }
-        .unicorn-btn:hover { background: var(--unicorn-gradient); color: #fff; border-color: transparent; }
-
-        .unicorn-line { height: 3px; background: var(--unicorn-gradient); width: 80px; margin: 2rem auto; border-radius: 10px; }
-        .content-p { font-size: 1rem; line-height: 1.8; color: #444; font-weight: 500; }
+        
+        /* 作品集響應式優化 */
+        .portfolio-img {
+            border-radius: 15px;
+            border: 3px solid white;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
 
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-xl px-6 py-4 flex justify-between items-center shadow-md">
-        <div class="text-2xl unicorn-text font-black tracking-[0.2em]">VITALITY</div>
-        <div class="hidden md:flex space-x-8 text-xs tracking-widest uppercase font-black">
-            <a href="#intro" class="text-purple-700">關於美學</a>
-            <a href="#portfolio" class="text-purple-700">大師傑作</a>
-            <a href="http://booking.hairweb.net" class="unicorn-text border-b-2 border-purple-400 pb-1">立即預約</a>
-        </div>
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md px-4 py-3 flex justify-between items-center shadow-sm">
+        <div class="text-xl unicorn-text font-black tracking-tighter">VITALITY</div>
+        <a href="http://booking.hairweb.net" class="text-xs font-black bg-purple-600 text-white px-4 py-2 rounded-full">立即預約</a>
     </nav>
 
-    <section class="h-screen flex flex-col justify-center items-center text-center px-4">
-        <div class="animate-fadeIn">
-            <h2 class="text-sm tracking-[0.6em] text-purple-500 mb-6 font-black">PREMIUM BEAUTY</h2>
-            <h1 class="text-6xl md:text-8xl unicorn-text mb-8 italic font-extrabold">Holy Hair Salon</h1>
-            <div class="unicorn-line"></div>
-            <p class="content-p max-w-2xl mb-12 tracking-widest font-bold">
-                在光影與虹彩交織的空間，為您的髮絲注入流光色彩。
-            </p>
-            <a href="http://booking.hairweb.net" class="unicorn-btn px-16 py-4 text-sm uppercase inline-block rounded-full">立即線上預約</a>
-        </div>
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-10">
+        <h2 class="text-xs tracking-[0.4em] text-purple-500 mb-4 font-black">PREMIUM BEAUTY</h2>
+        <h1 class="text-5xl unicorn-text mb-6 italic font-extrabold leading-tight">Holy Hair<br>Salon</h1>
+        <p class="text-base font-bold text-gray-600 mb-10 leading-relaxed">
+            在虹彩交織的空間，<br>為您量身打造專屬的美學時光。
+        </p>
+        <a href="#intro" class="animate-bounce text-purple-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="19 9l-7 7-7-7"></path></svg>
+        </a>
     </section>
 
-    <section id="intro" class="py-24 container mx-auto px-8 border-t-2 border-white">
-        <div class="grid md:grid-cols-2 gap-16 items-center mb-16">
-            <div class="rounded-3xl overflow-hidden shadow-2xl aspect-video border-8 border-white">
-                <img src="沙龍.png" class="w-full h-full object-cover">
+    <section id="intro" class="py-12 container mx-auto px-6">
+        <div class="mb-10">
+            <div class="rounded-2xl overflow-hidden shadow-xl border-4 border-white mb-6">
+                <img src="沙龍.png" class="w-full h-auto">
             </div>
-            <div class="space-y-8 text-left">
-                <h3 class="text-4xl unicorn-text font-black">探索美學空間</h3>
-                <p class="content-p font-bold">
-                    我們深信，美學不應只是視覺呈現。點擊下方分類，探索我們從空間、造型到洗護的職人堅持。
-                </p>
-            </div>
+            <h3 class="text-3xl unicorn-text font-black mb-4">探索美學空間</h3>
+            <p class="text-gray-700 font-bold leading-relaxed mb-8">
+                從踏入店內的接待區開始，到專業的造型與洗髮療程，我們堅持每一個細節都要充滿藝術感。
+            </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <a href="空間.html" class="category-card">
+        <div class="space-y-4">
+            <a href="空間.html" class="category-card block">
                 <img src="接待區.png" alt="接待區">
                 <span>美學空間</span>
             </a>
-            <a href="造型.html" class="category-card">
+            <a href="造型.html" class="category-card block">
                 <img src="造型.png" alt="造型">
                 <span>大師造型</span>
             </a>
-            <a href="洗髮.html" class="category-card">
+            <a href="洗髮.html" class="category-card block">
                 <img src="洗髮.png" alt="洗髮">
                 <span>極致洗髮</span>
             </a>
         </div>
     </section>
 
-    <section id="portfolio" class="py-24 bg-white/60">
-        <div class="container mx-auto px-8 text-center mb-16">
-            <h2 class="text-4xl unicorn-text mb-4 font-black">Portfolio</h2>
-            <p class="text-purple-600 text-xs tracking-[0.4em] uppercase font-black">經典作品系列</p>
+    <section id="portfolio" class="py-16 bg-white/50">
+        <div class="container mx-auto px-6 text-center mb-10">
+            <h2 class="text-3xl unicorn-text mb-2 font-black">Portfolio</h2>
+            <p class="text-purple-600 text-[10px] tracking-widest font-black uppercase">經典作品展示</p>
         </div>
-        <div class="container mx-auto px-4 grid grid-cols-2 md:grid-cols-5 gap-6">
-            <img src="hair1.png" class="rounded-2xl shadow-xl border-4 border-white aspect-[3/4] object-cover">
-            <img src="hair2.png" class="rounded-2xl shadow-xl border-4 border-white aspect-[3/4] object-cover">
-            <img src="hair3.png" class="rounded-2xl shadow-xl border-4 border-white aspect-[3/4] object-cover">
-            <img src="hair4.png" class="rounded-2xl shadow-xl border-4 border-white aspect-[3/4] object-cover">
-            <img src="hair5.png" class="rounded-2xl shadow-xl border-4 border-white aspect-[3/4] object-cover">
+        <div class="grid grid-cols-2 gap-4 px-4">
+            <img src="hair1.png" class="portfolio-img">
+            <img src="hair2.png" class="portfolio-img">
+            <img src="hair3.png" class="portfolio-img">
+            <img src="hair4.png" class="portfolio-img">
+            <img src="hair5.png" class="portfolio-img" style="grid-column: span 2;">
         </div>
     </section>
 
-    <footer class="py-24 text-center">
-        <a href="http://booking.hairweb.net" class="unicorn-btn px-20 py-5 text-sm uppercase inline-block rounded-full shadow-lg">立即預約您的美學時光</a>
-        <div class="mt-16 text-xs text-purple-400 font-bold tracking-widest">
-            VITALITY BEAUTY © 2026. MAGIC REDEFINED.
+    <footer class="py-20 text-center px-6">
+        <h2 class="text-xl unicorn-text mb-8 font-black">預約您的夢幻時刻</h2>
+        <a href="http://booking.hairweb.net" class="unicorn-btn w-full py-4 text-base uppercase inline-block rounded-xl shadow-lg">立即線上預約</a>
+        <div class="mt-12 text-[10px] text-purple-300 font-bold tracking-widest">
+            VITALITY BEAUTY © 2026<br>INTEGRATED WITH MENTOR 2.0
         </div>
     </footer>
 
