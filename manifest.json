@@ -1,34 +1,32 @@
 {
-  "name": "美業入口平台",
-  "short_name": "客戶預約",
+  "name": "VITALITY 美業預約平台",
+  "short_name": "VITALITY",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#F0F2F8",
+  "theme_color": "#6C5CE7",
   "lang": "zh-TW",
   "icons": [
     {
-      "src": "/logo.png",
+      "src": "logo.png",
       "sizes": "512x512",
       "type": "image/png"
-"screenshots": [
-  {
-    "src": "screenshot1.png",
-    "sizes": "1080x1920",
-    "type": "image/png",
-    "form_factor": "narrow",
-    "label": "手機版畫面"
-  },
-  {
-    "src": "screenshot2.png",
-    "sizes": "1920x1080",
-    "type": "image/png",
-    "form_factor": "wide",
-    "label": "電腦版畫面"
-  }
-]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot1.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "手機版畫面"
+    },
+    {
+      "src": "screenshot2.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "電腦版畫面"
     }
   ]
-
 }
-
