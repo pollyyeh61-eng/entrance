@@ -1,5 +1,5 @@
 // 定義快取名稱，每次更新內容時可以修改版本號（例如 v1 -> v2）
-const CACHE_NAME = 'vitality-hair-v1';
+const CACHE_NAME = 'vitality-hair-v2';
 
 // 定義需要快取的檔案路徑（讓客人在沒網路時也能看到頁面）
 const urlsToCache = [
@@ -58,3 +58,4 @@ self.addEventListener('fetch', (event) => {
       })
   );
 });
+
