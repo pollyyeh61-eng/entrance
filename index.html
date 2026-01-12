@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VITALITY | 門店預約入口</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,13 +11,7 @@
             --unicorn-gradient: linear-gradient(45deg, #FF99F1, #A29BFE, #6C5CE7, #81ECEC);
             --dream-bg: #F0F2F8; 
         }
-        body { 
-            background-color: var(--dream-bg); 
-            color: #2D3436; 
-            font-family: 'Noto Sans TC', sans-serif; 
-            scroll-behavior: smooth; 
-            overflow-x: hidden;
-        }
+        body { background-color: var(--dream-bg); color: #2D3436; font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
         
         .unicorn-text { 
             background: var(--unicorn-gradient); 
@@ -27,25 +21,29 @@
             filter: drop-shadow(0 2px 2px rgba(255, 255, 255, 0.8));
         }
 
-        /* 修正：沙龍圖獨立區塊，剛好滿版螢幕 */
-        .salon-hero {
+        /* 確保沙龍圖剛好一個螢幕高度且不擋住文字 */
+        .salon-img-container {
             width: 100%;
-            height: 100vh; /* 佔滿一個螢幕 */
+            height: 100vh;
+            overflow: hidden;
+        }
+        .salon-img-container img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            display: block;
         }
 
+        /* 分類框架圖形化 (保持您喜歡的設計) */
         .category-card {
             position: relative;
             overflow: hidden;
             border-radius: 20px;
-            height: 180px;
+            height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 4px solid white;
             box-shadow: 0 8px 15px rgba(108, 92, 231, 0.15);
-            margin-bottom: 1rem;
         }
         .category-card img {
             position: absolute;
@@ -60,82 +58,69 @@
             z-index: 2;
             color: white;
             font-weight: 900;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             letter-spacing: 0.2em;
             text-shadow: 0 2px 8px rgba(0,0,0,0.7);
         }
 
-        .unicorn-btn { 
-            border: 2px solid #6C5CE7; 
-            background: white;
-            color: #4834D4;
-            font-weight: 700;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(108, 92, 231, 0.2);
-        }
-
         .unicorn-line { height: 3px; background: var(--unicorn-gradient); width: 80px; margin: 2rem auto; border-radius: 10px; }
+        .unicorn-btn { border: 2px solid #6C5CE7; background: white; color: #4834D4; font-weight: 700; }
     </style>
 </head>
 <body>
 
-    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md px-4 py-3 flex justify-between items-center shadow-sm">
-        <div class="text-xl unicorn-text font-black">VITALITY</div>
-        <a href="http://booking.hairweb.net" class="text-xs font-black bg-purple-600 text-white px-4 py-2 rounded-full shadow-lg">立即預約</a>
-    </nav>
-
-    <section>
-        <img src="沙龍.png" class="salon-hero" alt="沙龍環境">
-    </section>
-
-    <section class="py-20 flex flex-col justify-center items-center text-center px-6">
-        <h2 class="text-sm tracking-[0.6em] text-purple-500 mb-6 font-black">PREMIUM BEAUTY</h2>
-        <h1 class="text-5xl md:text-7xl unicorn-text mb-8 italic font-extrabold">Holy Hair Salon</h1>
+    <section class="pt-32 pb-20 flex flex-col justify-center items-center text-center px-6">
+        <h2 class="text-sm tracking-[0.6em] text-purple-500 mb-6 font-black uppercase">Premium Beauty Experience</h2>
+        <h1 class="text-6xl md:text-8xl unicorn-text mb-8 italic font-extrabold">Holy Hair Salon</h1>
         <div class="unicorn-line"></div>
         <p class="text-lg font-bold text-gray-700 max-w-2xl mb-12 tracking-widest leading-relaxed">
-            在光影與虹彩交織的空間，<br>為您的髮絲注入流光色彩。
+            在光影與虹彩交織的空間，<br>為您的髮絲注入流光色彩，開啟您的尊榮蛻變之旅。
         </p>
-        <a href="http://booking.hairweb.net" class="unicorn-btn px-16 py-4 text-sm uppercase inline-block rounded-full">立即線上預約</a>
+        <a href="http://booking.hairweb.net" class="unicorn-btn px-16 py-4 text-sm uppercase inline-block rounded-full shadow-lg">進入預約系統</a>
     </section>
 
-    <section id="intro" class="py-12 container mx-auto px-6 border-t-2 border-white">
-        <div class="mb-10 text-center">
-            <h3 class="text-3xl unicorn-text font-black mb-4">探索美學分類</h3>
-            <p class="text-gray-700 font-bold leading-relaxed">職人精神的極致堅持</p>
-        </div>
+    <section class="salon-img-container">
+        <img src="沙龍.png" alt="Salon Interior">
+    </section>
 
-        <div class="space-y-4">
-            <a href="空間.html" class="category-card block">
+    <section id="intro" class="py-24 container mx-auto px-8">
+        <div class="text-center mb-16">
+            <h3 class="text-4xl unicorn-text font-black mb-4">探索美學分類</h3>
+            <p class="text-gray-700 font-bold text-lg">職人精神的極致堅持</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <a href="空間.html" class="category-card">
                 <img src="接待區.png" alt="接待區">
                 <span>美學空間</span>
             </a>
-            <a href="造型.html" class="category-card block">
+            <a href="造型.html" class="category-card">
                 <img src="造型.png" alt="造型">
                 <span>大師造型</span>
             </a>
-            <a href="洗髮.html" class="category-card block">
+            <a href="洗髮.html" class="category-card">
                 <img src="洗髮.png" alt="洗髮">
                 <span>極致洗髮</span>
             </a>
         </div>
     </section>
 
-    <section id="portfolio" class="py-16 bg-white/50">
-        <div class="container mx-auto px-2 text-center mb-8">
-            <h2 class="text-3xl unicorn-text mb-2 font-black">Portfolio</h2>
+    <section id="portfolio" class="py-24 bg-white/60">
+        <div class="container mx-auto px-8 text-center mb-12">
+            <h2 class="text-4xl unicorn-text mb-2 font-black">Portfolio</h2>
         </div>
-        
-        <div class="flex flex-row gap-1 px-1 justify-center">
-            <div class="w-1/5"><img src="hair1.png" class="w-full aspect-[3/4] object-cover rounded-md border-2 border-white"></div>
-            <div class="w-1/5"><img src="hair2.png" class="w-full aspect-[3/4] object-cover rounded-md border-2 border-white"></div>
-            <div class="w-1/5"><img src="hair3.png" class="w-full aspect-[3/4] object-cover rounded-md border-2 border-white"></div>
-            <div class="w-1/5"><img src="hair4.png" class="w-full aspect-[3/4] object-cover rounded-md border-2 border-white"></div>
-            <div class="w-1/5"><img src="hair5.png" class="w-full aspect-[3/4] object-cover rounded-md border-2 border-white"></div>
+        <div class="flex flex-row gap-2 px-4 justify-center">
+            <img src="hair1.png" class="w-1/5 aspect-[3/4] object-cover rounded-xl shadow-md border-4 border-white">
+            <img src="hair2.png" class="w-1/5 aspect-[3/4] object-cover rounded-xl shadow-md border-4 border-white">
+            <img src="hair3.png" class="w-1/5 aspect-[3/4] object-cover rounded-xl shadow-md border-4 border-white">
+            <img src="hair4.png" class="w-1/5 aspect-[3/4] object-cover rounded-xl shadow-md border-4 border-white">
+            <img src="hair5.png" class="w-1/5 aspect-[3/4] object-cover rounded-xl shadow-md border-4 border-white">
         </div>
     </section>
 
-    <footer class="py-16 text-center px-6">
-        <p class="mt-4 text-[10px] text-purple-300 font-bold tracking-widest uppercase">VITALITY BEAUTY © 2026</p>
+    <footer class="py-20 text-center">
+        <div class="text-xs text-purple-400 font-bold tracking-widest uppercase">
+            VITALITY BEAUTY © 2026. MAGIC REDEFINED.
+        </div>
     </footer>
 
 </body>
