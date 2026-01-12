@@ -1,6 +1,6 @@
 {
-  "name": "活力美髮學堂官網",
-  "short_name": "活力美髮學堂官網",
+  "name": "美業入口平台",
+  "short_name": "客戶預約",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -29,4 +29,5 @@
 ]
     }
   ]
+
 }
