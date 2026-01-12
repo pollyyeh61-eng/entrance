@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>美業預約入口</title>
     
     <meta name="mobile-web-app-capable" content="yes">
@@ -178,8 +178,6 @@
     </div>
 
     <script>
-        // 修正點 2: 確保所有 JavaScript 都在 <script> 標籤內
-        
         // 1. 註冊 Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -200,16 +198,31 @@
             document.body.style.overflow = 'auto';
         }
 
-        // 3. 安裝邏輯
+        // 3. 進階安裝邏輯 (支援 Android & iOS)
         let deferredPrompt;
         const installBtn = document.getElementById('install-btn');
+        const installGuide = document.getElementById('install-guide');
 
+        // 判斷是否為 iOS
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        // 判斷是否已經在 App 模式中開啟
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
+        // 針對 Android/Chrome
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            // 手機版顯示引導
-            if (window.innerWidth <= 768) {
-                document.getElementById('install-guide').style.display = 'flex';
+            if (window.innerWidth <= 768 && !isStandalone) {
+                installGuide.style.display = 'flex';
+            }
+        });
+
+        // 針對 iOS (因為 iOS 不會觸發 beforeinstallprompt)
+        window.addEventListener('load', () => {
+            if (isIOS && window.innerWidth <= 768 && !isStandalone) {
+                setTimeout(() => {
+                    installGuide.style.display = 'flex';
+                }, 2000); // 延遲兩秒顯示，增加美感
             }
         });
 
@@ -218,11 +231,13 @@
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
                     const { outcome } = await deferredPrompt.userChoice;
-                    console.log(`使用者選擇了: ${outcome}`);
+                    console.log(`User choice: ${outcome}`);
                     deferredPrompt = null;
-                    document.getElementById('install-guide').style.display = 'none';
+                    installGuide.style.display = 'none';
                 } else {
-                    alert("請點擊瀏覽器下方的『分享』按鈕，然後選擇『加入主畫面』即可完成安裝！");
+                    // iPhone 或不支援直接觸發時的提示
+                    alert("✨ 預約祕技：\n請點擊瀏覽器下方的『分享』按鈕 (正方形箭頭圖示)，然後選擇『加入主畫面』即可完成安裝！");
+                    installGuide.style.display = 'none';
                 }
             });
         }
