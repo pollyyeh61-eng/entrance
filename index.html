@@ -21,11 +21,13 @@
             filter: drop-shadow(0 2px 2px rgba(255, 255, 255, 0.8));
         }
 
-        /* 確保沙龍圖剛好一個螢幕高度且不擋住文字 */
+        /* 預設手機版：沙龍圖滿版 */
         .salon-img-container {
             width: 100%;
             height: 100vh;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
         }
         .salon-img-container img {
             width: 100%;
@@ -33,7 +35,18 @@
             object-fit: cover;
         }
 
-        /* 分類框架圖形化 (保持您喜歡的設計) */
+        /* 電腦版 (螢幕大於 1024px) 特別調整 */
+        @media (min-width: 1024px) {
+            .salon-img-container {
+                height: 60vh; /* 電腦版圖片縮小高度，不佔滿全螢幕 */
+                width: 80%;   /* 寬度也稍微內縮，看起來更精緻 */
+                margin: 0 auto;
+                border-radius: 30px; /* 增加一點圓角感 */
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            }
+        }
+
+        /* 分類框架圖形化 */
         .category-card {
             position: relative;
             overflow: hidden;
@@ -64,7 +77,8 @@
         }
 
         .unicorn-line { height: 3px; background: var(--unicorn-gradient); width: 80px; margin: 2rem auto; border-radius: 10px; }
-        .unicorn-btn { border: 2px solid #6C5CE7; background: white; color: #4834D4; font-weight: 700; }
+        .unicorn-btn { border: 2px solid #6C5CE7; background: white; color: #4834D4; font-weight: 700; transition: 0.3s; }
+        .unicorn-btn:hover { background: var(--unicorn-gradient); color: white; border-color: transparent; }
     </style>
 </head>
 <body>
