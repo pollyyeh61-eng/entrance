@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="logo.png" type="image/png">
     <title>VITALITY | 門店預約入口</title>
     
-    <meta name="apple-mobile-web-app-title" content="VITALITY">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="VITALITY">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link rel="apple-touch-icon" href="logo.png">
+    <link rel="icon" href="logo.png" type="image/png"> 
     <link rel="manifest" href="manifest.json">
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
@@ -31,7 +31,6 @@
             filter: drop-shadow(0 2px 2px rgba(255, 255, 255, 0.8));
         }
 
-        /* 預設手機版：沙龍圖滿版 */
         .salon-img-container {
             width: 100%;
             height: 100vh;
@@ -45,7 +44,6 @@
             object-fit: cover;
         }
 
-        /* 電腦版調整 */
         @media (min-width: 1024px) {
             .salon-img-container {
                 height: 60vh; 
@@ -89,7 +87,6 @@
         .unicorn-btn { border: 2px solid #6C5CE7; background: white; color: #4834D4; font-weight: 700; transition: 0.3s; }
         .unicorn-btn:hover { background: var(--unicorn-gradient); color: white; border-color: transparent; }
 
-        /* 燈箱樣式 */
         #lightbox {
             display: none;
             position: fixed;
@@ -181,7 +178,7 @@
     </div>
 
     <script>
-        // 註冊 Service Worker (PWA 核心)
+        // 1. 註冊 Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
@@ -190,7 +187,7 @@
             });
         }
 
-        // 燈箱控制
+        // 2. 燈箱功能
         function openLightbox(src) {
             document.getElementById('lightbox-img').src = src;
             document.getElementById('lightbox').style.display = 'flex';
@@ -201,12 +198,12 @@
             document.body.style.overflow = 'auto';
         }
 
-        // 安裝提示顯示邏輯
+        // 3. 安裝引導顯示判斷
         if (window.innerWidth > 768) {
-            document.getElementById('install-guide').style.display = 'none';
+            const guide = document.getElementById('install-guide');
+            if (guide) guide.style.display = 'none';
         }
     </script>
 
 </body>
 </html>
-
