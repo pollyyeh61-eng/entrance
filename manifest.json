@@ -1,7 +1,7 @@
 {
   "name": "美業預約平台",
   "short_name": "客戶預約",
-  "start_url": "/index.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#F0F2F8",
   "theme_color": "#6C5CE7",
@@ -30,4 +30,5 @@
     }
   ]
 }
+
 
