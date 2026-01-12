@@ -4,65 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VITALITY | 夢幻美學入口</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            /* 獨角獸炫彩漸層 */
-            --unicorn-gradient: linear-gradient(45deg, #FF99F1, #FFDBFE, #A29BFE, #6C5CE7, #81ECEC);
-            --dream-bg: #F8F9FF; /* 極淺的夢幻紫底色 */
-            --crystal-blur: rgba(255, 255, 255, 0.7);
+            --unicorn-gradient: linear-gradient(45deg, #FF99F1, #A29BFE, #6C5CE7, #81ECEC);
+            --dream-bg: #F0F2F8; /* 稍微加深背景色以增加對比 */
+            --text-dark: #2D3436; /* 顯眼的深色文字 */
         }
-        body { background-color: var(--dream-bg); color: #57606f; font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
+        body { background-color: var(--dream-bg); color: var(--text-dark); font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
         
-        /* 炫彩文字 */
+        /* 強化標題清晰度 */
         .unicorn-text { 
             background: var(--unicorn-gradient); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
-            font-family: 'Playfair Display', serif; 
+            font-family: 'Playfair Display', serif;
+            filter: drop-shadow(0 2px 2px rgba(255, 255, 255, 0.8));
         }
         
-        /* 夢幻炫彩按鈕 */
         .unicorn-btn { 
-            border: 2px solid #FF99F1; 
+            border: 2px solid #6C5CE7; /* 加深邊框色 */
             background: white;
-            color: #6C5CE7;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
-            letter-spacing: 0.2em;
-            box-shadow: 0 5px 15px rgba(255, 153, 241, 0.2);
+            color: #4834D4; /* 加深按鈕文字 */
+            transition: all 0.4s ease; 
+            letter-spacing: 0.15em;
+            box-shadow: 0 4px 10px rgba(108, 92, 231, 0.15);
+            font-weight: 700; /* 加粗文字 */
         }
         .unicorn-btn:hover { 
             background: var(--unicorn-gradient); 
             color: #fff; 
-            box-shadow: 0 10px 30px rgba(162, 155, 254, 0.5);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             border-color: transparent;
         }
 
-        /* 炫彩裝飾線 */
-        .unicorn-line { height: 2px; background: var(--unicorn-gradient); width: 100px; margin: 2rem auto; border-radius: 2px; }
+        .unicorn-line { height: 3px; background: var(--unicorn-gradient); width: 80px; margin: 2rem auto; border-radius: 10px; }
 
-        /* 背景流光裝飾 (改為粉紫色調) */
+        /* 導覽列文字強化 */
+        nav a { font-weight: 700 !important; color: #4834D4 !important; }
+        nav a:hover { color: #FF99F1 !important; }
+
         .bg-glow {
             position: absolute;
             width: 50vw;
             height: 50vw;
-            background: radial-gradient(circle, rgba(255, 153, 241, 0.2) 0%, rgba(162, 155, 254, 0.1) 50%, rgba(255,255,255,0) 70%);
+            background: radial-gradient(circle, rgba(255, 153, 241, 0.25) 0%, rgba(162, 155, 254, 0.15) 70%);
             z-index: -1;
             filter: blur(80px);
-            animation: pulse 8s infinite alternate;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.5; }
-            100% { transform: scale(1.2); opacity: 0.8; }
         }
 
-        .img-container img { transition: transform 0.8s ease; }
-        .img-container:hover img { transform: scale(1.05); }
-        
-        /* 導覽列毛玻璃效果 */
-        nav { background: rgba(255, 255, 255, 0.8) !important; border-bottom: 1px solid rgba(255, 153, 241, 0.2) !important; }
+        /* 內容區塊強化 */
+        .content-p { font-size: 1rem; line-height: 1.8; color: #444; font-weight: 500; }
     </style>
 </head>
 <body>
@@ -70,95 +63,82 @@
     <div class="bg-glow top-[-10%] left-[-10%]"></div>
     <div class="bg-glow bottom-[-10%] right-[-10%]"></div>
 
-    <nav class="fixed w-full z-50 backdrop-blur-xl px-8 py-5 flex justify-between items-center shadow-sm">
-        <div class="text-2xl unicorn-text font-bold tracking-[0.3em]">VITALITY</div>
-        <div class="hidden md:flex space-x-12 text-[10px] tracking-[0.4em] text-purple-400 uppercase font-bold">
-            <a href="#intro" class="hover:text-pink-500 transition">關於美學</a>
-            <a href="#portfolio" class="hover:text-pink-500 transition">大師傑作</a>
-            <a href="http://booking.hairweb.net" class="unicorn-text border-b-2 border-pink-300 pb-1">立即預約</a>
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-xl px-6 py-4 flex justify-between items-center shadow-md border-b-2 border-purple-100">
+        <div class="text-2xl unicorn-text font-extrabold tracking-[0.2em]">VITALITY</div>
+        <div class="hidden md:flex space-x-8 text-xs tracking-widest uppercase font-black">
+            <a href="#intro" class="transition">關於美學</a>
+            <a href="#portfolio" class="transition">大師傑作</a>
+            <a href="http://booking.hairweb.net" class="unicorn-text border-b-2 border-purple-400 pb-1">立即預約</a>
         </div>
     </nav>
 
-    <section class="h-screen flex flex-col justify-center items-center text-center px-4 relative">
+    <section class="h-screen flex flex-col justify-center items-center text-center px-4">
         <div class="animate-fadeIn">
-            <h2 class="text-[12px] tracking-[0.8em] text-purple-300 mb-8 uppercase font-bold">Magic Beauty Experience</h2>
-            <h1 class="text-6xl md:text-8xl unicorn-text mb-8 italic font-bold">Holy Hair Salon</h1>
+            <h2 class="text-sm tracking-[0.6em] text-purple-500 mb-6 font-black">PREMIUM BEAUTY</h2>
+            <h1 class="text-6xl md:text-8xl unicorn-text mb-8 italic font-extrabold">Holy Hair Salon</h1>
             <div class="unicorn-line"></div>
-            <p class="text-gray-500 max-w-2xl mb-12 text-sm leading-8 tracking-[0.2em] font-medium">
-                在雲朵與虹光之間，定義您的專屬魅力。<br>
-                結合數位智能管理與夢幻美學，開啟您的尊榮蛻變之旅。
+            <p class="content-p max-w-2xl mb-12 tracking-widest">
+                在光影與虹彩交織的空間，<br>
+                為您的髮絲注入流光色彩，開啟您的尊榮蛻變之旅。
             </p>
-            <a href="http://booking.hairweb.net" class="unicorn-btn px-12 py-4 text-xs uppercase inline-block rounded-full font-bold">進入預約系統</a>
+            <a href="http://booking.hairweb.net" class="unicorn-btn px-16 py-4 text-sm uppercase inline-block rounded-full">立即線上預約</a>
         </div>
     </section>
 
-    <section id="intro" class="py-32 container mx-auto px-8 border-t border-pink-100">
-        <div class="grid md:grid-cols-2 gap-20 items-center">
-            <div class="img-container relative overflow-hidden rounded-2xl shadow-2xl aspect-[4/5]">
-                <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1200" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-purple-200/50 to-transparent"></div>
+    <section id="intro" class="py-24 container mx-auto px-8 border-t-2 border-white">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="img-container relative overflow-hidden rounded-3xl shadow-2xl aspect-[16/9] border-8 border-white">
+                <img src="hair1.png" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-purple-200/30 to-transparent"></div>
             </div>
-            <div class="space-y-10">
-                <h3 class="text-5xl unicorn-text leading-tight font-bold">炫彩工藝<br><span class="text-purple-400 text-3xl font-light italic">沉浸式的夢幻美學</span></h3>
-                <p class="text-gray-500 leading-9 text-sm tracking-widest font-normal">
-                    我們將空間轉化為虹彩般的聖殿。每一處光影的流動，都是為了襯托您獨一無二的氣質。從踏入 VITALITY 的那一刻起，您將感受前所未有的夢幻體驗。
+            <div class="space-y-8">
+                <h3 class="text-4xl unicorn-text font-black">探索美學分類</h3>
+                <p class="content-p">
+                    我們深信，美學不應只是視覺呈現。點擊下方分類，探索我們從空間、造型到洗護的職人堅持。
                 </p>
-                <div class="grid grid-cols-1 gap-4 pt-4">
-                    <a href="空間.html" class="unicorn-btn px-6 py-3 text-center text-xs rounded-lg">探索美學空間</a>
-                    <a href="造型.html" class="unicorn-btn px-6 py-3 text-center text-xs rounded-lg">大師造型設計</a>
-                    <a href="洗髮.html" class="unicorn-btn px-6 py-3 text-center text-xs rounded-lg">極致洗髮療癒</a>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <a href="空間.html" class="unicorn-btn py-4 text-center rounded-xl text-xs">美學空間</a>
+                    <a href="造型.html" class="unicorn-btn py-4 text-center rounded-xl text-xs">大師造型</a>
+                    <a href="洗髮.html" class="unicorn-btn py-4 text-center rounded-xl text-xs">極致洗髮</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="portfolio" class="py-32 bg-white/50">
-        <div class="container mx-auto px-8 text-center mb-20">
-            <h2 class="text-4xl unicorn-text mb-6 font-bold">Portfolio</h2>
-            <p class="text-purple-300 text-xs tracking-[0.5em] uppercase font-bold">大師傑作系列</p>
+    <section id="portfolio" class="py-24 bg-white/60 shadow-inner">
+        <div class="container mx-auto px-8 text-center mb-16">
+            <h2 class="text-4xl unicorn-text mb-4 font-black">Portfolio</h2>
+            <p class="text-purple-600 text-xs tracking-[0.4em] uppercase font-black">經典作品系列</p>
         </div>
-        <div class="container mx-auto px-8 grid grid-cols-2 md:grid-cols-5 gap-4">
-            <div class="img-container group relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg border-2 border-white">
-                <img src="hair1.jpg" class="w-full h-full object-cover" alt="作品1">
-                <div class="absolute inset-0 bg-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span class="text-white text-[10px] tracking-widest font-bold">HAIR ART 01</span>
-                </div>
+        <div class="container mx-auto px-4 grid grid-cols-2 md:grid-cols-5 gap-6">
+            <div class="group relative rounded-2xl overflow-hidden shadow-xl border-4 border-white">
+                <img src="hair1.png" class="w-full h-full object-cover aspect-[3/4]" alt="作品1">
+                <div class="absolute bottom-0 w-full bg-white/90 p-2 text-center text-[10px] font-bold text-purple-700">Art Piece 01</div>
             </div>
-            <div class="img-container group relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg border-2 border-white">
-                <img src="hair2.jpg" class="w-full h-full object-cover" alt="作品2">
-                <div class="absolute inset-0 bg-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span class="text-white text-[10px] tracking-widest font-bold">HAIR ART 02</span>
-                </div>
+            <div class="group relative rounded-2xl overflow-hidden shadow-xl border-4 border-white">
+                <img src="hair2.png" class="w-full h-full object-cover aspect-[3/4]" alt="作品2">
+                <div class="absolute bottom-0 w-full bg-white/90 p-2 text-center text-[10px] font-bold text-purple-700">Art Piece 02</div>
             </div>
-            <div class="img-container group relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg border-2 border-white">
-                <img src="hair3.jpg" class="w-full h-full object-cover" alt="作品3">
-                <div class="absolute inset-0 bg-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span class="text-white text-[10px] tracking-widest font-bold">HAIR ART 03</span>
-                </div>
+            <div class="group relative rounded-2xl overflow-hidden shadow-xl border-4 border-white">
+                <img src="hair3.png" class="w-full h-full object-cover aspect-[3/4]" alt="作品3">
+                <div class="absolute bottom-0 w-full bg-white/90 p-2 text-center text-[10px] font-bold text-purple-700">Art Piece 03</div>
             </div>
-            <div class="img-container group relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg border-2 border-white">
-                <img src="hair4.jpg" class="w-full h-full object-cover" alt="作品4">
-                <div class="absolute inset-0 bg-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span class="text-white text-[10px] tracking-widest font-bold">HAIR ART 04</span>
-                </div>
+            <div class="group relative rounded-2xl overflow-hidden shadow-xl border-4 border-white">
+                <img src="hair4.png" class="w-full h-full object-cover aspect-[3/4]" alt="作品4">
+                <div class="absolute bottom-0 w-full bg-white/90 p-2 text-center text-[10px] font-bold text-purple-700">Art Piece 04</div>
             </div>
-            <div class="img-container group relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg border-2 border-white">
-                <img src="hair5.jpg" class="w-full h-full object-cover" alt="作品5">
-                <div class="absolute inset-0 bg-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span class="text-white text-[10px] tracking-widest font-bold">HAIR ART 05</span>
-                </div>
+            <div class="group relative rounded-2xl overflow-hidden shadow-xl border-4 border-white">
+                <img src="hair5.png" class="w-full h-full object-cover aspect-[3/4]" alt="作品5">
+                <div class="absolute bottom-0 w-full bg-white/90 p-2 text-center text-[10px] font-bold text-purple-700">Art Piece 05</div>
             </div>
         </div>
     </section>
 
-    <footer id="booking" class="py-40 border-t border-pink-100 text-center relative overflow-hidden">
-        <div class="max-w-xl mx-auto px-4 relative z-10">
-            <h2 class="text-2xl unicorn-text mb-8 tracking-[0.3em] font-bold">RESERVE YOUR DREAM</h2>
-            <p class="text-purple-400 text-xs mb-12 leading-loose font-medium">預約一個虹彩般的午後，讓我們的匠心為您的獨特妝點色彩。</p>
-            <a href="http://booking.hairweb.net" class="unicorn-btn px-20 py-5 text-sm uppercase inline-block rounded-full font-bold">立即線上預約</a>
-        </div>
-        <div class="mt-40 text-[9px] text-purple-300 tracking-[0.8em] uppercase font-bold">
-            VITALITY BEAUTY ACADEMY © 2026. MAGIC REDEFINED.
+    <footer class="py-24 text-center">
+        <h2 class="text-2xl unicorn-text mb-8 tracking-widest font-black">RESERVE YOUR DREAM</h2>
+        <a href="http://booking.hairweb.net" class="unicorn-btn px-20 py-5 text-sm uppercase inline-block rounded-full shadow-lg">立即預約您的美學時光</a>
+        <div class="mt-16 text-xs text-purple-400 font-bold tracking-widest uppercase">
+            VITALITY BEAUTY © 2026. LUXURY REDEFINED.
         </div>
     </footer>
 
