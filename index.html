@@ -84,7 +84,7 @@
         }
 
         .unicorn-line { height: 3px; background: var(--unicorn-gradient); width: 60px; margin: 2rem auto; border-radius: 10px; }
-        .unicorn-btn { border: 2px solid #6C5CE7; background: white; color: #4834D4; font-weight: 700; transition: 0.3s; }
+        .unicorn-btn { border: 2px solid #6C5CE7; background: white; color: #4834D4; font-weight: 700; transition: 0.3s; text-align: center; }
         .unicorn-btn:hover { background: var(--unicorn-gradient); color: white; border-color: transparent; }
 
         #lightbox {
@@ -116,7 +116,7 @@
         <p class="text-sm md:text-lg font-bold text-gray-500 max-w-xl mb-12 tracking-[0.15em] leading-relaxed">
             在光影與虹彩交織的空間，<br>為您的髮絲注入流光色彩。
         </p>
-        <a href="https://mentor2https://pollyyeh61-eng.github.io/MentorApp2.0/booking.html" class="unicorn-btn px-12 py-3.5 text-xs uppercase inline-block rounded-full shadow-lg tracking-widest">進入預約系統</a>
+        <a href="https://pollyyeh61-eng.github.io/MentorApp2.0/booking.html" class="unicorn-btn px-12 py-3.5 text-xs uppercase inline-block rounded-full shadow-lg tracking-widest">進入預約系統</a>
     </section>
 
     <section class="salon-img-container">
@@ -170,10 +170,10 @@
         <img id="lightbox-img" src="" alt="Large View">
     </div>
 
-    <div id="install-guide" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md px-6 py-4 rounded-2xl shadow-2xl z-[1000] flex items-center gap-4 border border-purple-200 animate-bounce md:hidden">
-   <div id="install-btn" class="text-xs font-bold text-gray-600 cursor-pointer">
-         點擊 <span class="text-purple-600">"安裝 App 到桌面"</span><br>預約專屬髮型師更方便！
-   </div>
+    <div id="install-guide" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md px-6 py-4 rounded-2xl shadow-2xl z-[1000] flex items-center gap-4 border border-purple-200 animate-bounce md:hidden" style="display: none;">
+        <div id="install-btn" class="text-xs font-bold text-gray-600 cursor-pointer">
+              點擊 <span class="text-purple-600">"安裝 App 到桌面"</span><br>預約專屬髮型師更方便！
+        </div>
         <button onclick="this.parentElement.style.display='none'" class="text-gray-400 text-lg">×</button>
     </div>
 
@@ -181,7 +181,7 @@
         // 1. 註冊 Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
+                navigator.serviceWorker.register('sw.js')
                     .then(reg => console.log('Service Worker 註冊成功！'))
                     .catch(err => console.log('Service Worker 註冊失敗：', err));
             });
@@ -198,48 +198,38 @@
             document.body.style.overflow = 'auto';
         }
 
-        // 3. 安裝引導顯示判斷
+        // 3. 安裝功能核心邏輯
+        let deferredPrompt;
+        const installBtn = document.getElementById('install-btn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            // 只有在手機版且事件觸發時才顯示引導
+            if (window.innerWidth <= 768) {
+                document.getElementById('install-guide').style.display = 'flex';
+            }
+        });
+
+        if(installBtn) {
+            installBtn.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log(`使用者選擇了: ${outcome}`);
+                    deferredPrompt = null;
+                    document.getElementById('install-guide').style.display = 'none';
+                } else {
+                    alert("請點擊瀏覽器下方的『分享』按鈕，然後選擇『加入主畫面』即可完成安裝！");
+                }
+            });
+        }
+
+        // 4. 初始隱藏判斷
         if (window.innerWidth > 768) {
             const guide = document.getElementById('install-guide');
             if (guide) guide.style.display = 'none';
         }
     </script>
-let deferredPrompt;
-const installBtn = document.getElementById('install-btn');
-
-// 1. 監聽瀏覽器的安裝提示事件
-window.addEventListener('beforeinstallprompt', (e) => {
-    // 阻止瀏覽器自動彈出預設視窗
-    e.preventDefault();
-    // 將事件存起來
-    deferredPrompt = e;
-    // 顯示您的引導區塊 (原本可能是隱藏的)
-    document.getElementById('install-guide').style.display = 'flex';
-});
-
-// 2. 當使用者點擊您的文字區塊時執行
-installBtn.addEventListener('click', async () => {
-    if (deferredPrompt) {
-        // 彈出安裝對話框
-        deferredPrompt.prompt();
-        // 等待使用者回應
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log(`使用者選擇了: ${outcome}`);
-        // 執行過後清空，不能重複使用
-        deferredPrompt = null;
-        // 隱藏引導區塊
-        document.getElementById('install-guide').style.display = 'none';
-    } else {
-        // 如果瀏覽器不支持直接觸發 (例如 iOS Safari)
-        alert("請點擊瀏覽器下方的『分享』按鈕，然後選擇『加入主畫面』即可完成安裝！");
-    }
-});
 </body>
 </html>
-
-
-
-
-
-
-
