@@ -3,34 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VITALITY | 門店預約入口</title>
+    
     <meta name="apple-mobile-web-app-title" content="VITALITY">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link rel="apple-touch-icon" href="logo.png">
-    <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then(reg => console.log('Service Worker 註冊成功！', reg))
-        .catch(err => console.log('Service Worker 註冊失敗：', err));
-    });
-  }
-</script>
-    <title>VITALITY | 門店預約入口</title>
+    <link rel="manifest" href="manifest.json">
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <div id="install-guide" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md px-6 py-4 rounded-2xl shadow-2xl z-[1000] flex items-center gap-4 border border-purple-200 animate-bounce md:hidden">
-    <div class="text-xs font-bold text-gray-600">
-        點擊 <span class="text-purple-600">"加入主畫面"</span><br>預約專屬髮型師更方便！
-    </div>
-    <button onclick="this.parentElement.style.display='none'" class="text-gray-400 text-lg">×</button>
-</div>
-<script>
-    // 只有手機版才顯示這個提示
-    if (window.innerWidth > 768) {
-        document.getElementById('install-guide').style.display = 'none';
-    }
-</script>
+
     <style>
         :root {
             --unicorn-gradient: linear-gradient(45deg, #FF99F1, #A29BFE, #6C5CE7, #81ECEC);
@@ -104,7 +88,7 @@
         .unicorn-btn { border: 2px solid #6C5CE7; background: white; color: #4834D4; font-weight: 700; transition: 0.3s; }
         .unicorn-btn:hover { background: var(--unicorn-gradient); color: white; border-color: transparent; }
 
-        /* 燈箱(大圖查看)樣式 */
+        /* 燈箱樣式 */
         #lightbox {
             display: none;
             position: fixed;
@@ -176,10 +160,6 @@
         </div>
     </section>
 
-    <div id="lightbox" onclick="closeLightbox()">
-        <img id="lightbox-img" src="" alt="Large View">
-    </div>
-
     <footer class="py-24 text-center px-8 bg-white/40">
         <h3 class="text-xl unicorn-text font-black mb-8 tracking-widest">RESERVE YOUR DREAM</h3>
         <a href="http://booking.hairweb.net" class="unicorn-btn px-16 py-4 text-sm uppercase inline-block rounded-full shadow-xl tracking-widest">立即線上預約</a>
@@ -188,21 +168,43 @@
         </div>
     </footer>
 
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Large View">
+    </div>
+
+    <div id="install-guide" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md px-6 py-4 rounded-2xl shadow-2xl z-[1000] flex items-center gap-4 border border-purple-200 animate-bounce md:hidden">
+        <div class="text-xs font-bold text-gray-600">
+            點擊 <span class="text-purple-600">"加入主畫面"</span><br>預約專屬髮型師更方便！
+        </div>
+        <button onclick="this.parentElement.style.display='none'" class="text-gray-400 text-lg">×</button>
+    </div>
+
     <script>
+        // 註冊 Service Worker (PWA 核心)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker 註冊成功！'))
+                    .catch(err => console.log('Service Worker 註冊失敗：', err));
+            });
+        }
+
+        // 燈箱控制
         function openLightbox(src) {
             document.getElementById('lightbox-img').src = src;
             document.getElementById('lightbox').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // 防止背景滾動
+            document.body.style.overflow = 'hidden';
         }
-
         function closeLightbox() {
             document.getElementById('lightbox').style.display = 'none';
-            document.body.style.overflow = 'auto'; // 恢復背景滾動
+            document.body.style.overflow = 'auto';
+        }
+
+        // 安裝提示顯示邏輯
+        if (window.innerWidth > 768) {
+            document.getElementById('install-guide').style.display = 'none';
         }
     </script>
 
 </body>
 </html>
-
-
-
