@@ -17,7 +17,6 @@
             font-family: 'Noto Sans TC', sans-serif; 
             scroll-behavior: smooth; 
             overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
         }
         
         .unicorn-text { 
@@ -28,20 +27,14 @@
             filter: drop-shadow(0 2px 2px rgba(255, 255, 255, 0.8));
         }
 
-        /* 滿版首圖容器 */
-        .hero-container {
-            height: 100vh;
+        /* 修正：沙龍圖獨立區塊，剛好滿版螢幕 */
+        .salon-hero {
             width: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-img {
-            width: 100%;
-            height: 100%;
+            height: 100vh; /* 佔滿一個螢幕 */
             object-fit: cover;
+            display: block;
         }
 
-        /* 圖形化分類框 (保持原有設計) */
         .category-card {
             position: relative;
             overflow: hidden;
@@ -80,6 +73,8 @@
             text-align: center;
             box-shadow: 0 4px 10px rgba(108, 92, 231, 0.2);
         }
+
+        .unicorn-line { height: 3px; background: var(--unicorn-gradient); width: 80px; margin: 2rem auto; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -89,18 +84,24 @@
         <a href="http://booking.hairweb.net" class="text-xs font-black bg-purple-600 text-white px-4 py-2 rounded-full shadow-lg">立即預約</a>
     </nav>
 
-    <section class="hero-container">
-        <img src="沙龍.png" class="hero-img" alt="沙龍環境">
-        <div class="absolute inset-0 bg-black/20 flex flex-col justify-center items-center text-center px-6">
-            <h1 class="text-5xl unicorn-text mb-4 italic font-extrabold leading-tight">Holy Hair Salon</h1>
-            <p class="text-white font-bold tracking-widest text-sm bg-black/30 px-4 py-2 rounded-lg">夢幻美學 · 極致體驗</p>
-        </div>
+    <section>
+        <img src="沙龍.png" class="salon-hero" alt="沙龍環境">
     </section>
 
-    <section id="intro" class="py-12 container mx-auto px-6">
+    <section class="py-20 flex flex-col justify-center items-center text-center px-6">
+        <h2 class="text-sm tracking-[0.6em] text-purple-500 mb-6 font-black">PREMIUM BEAUTY</h2>
+        <h1 class="text-5xl md:text-7xl unicorn-text mb-8 italic font-extrabold">Holy Hair Salon</h1>
+        <div class="unicorn-line"></div>
+        <p class="text-lg font-bold text-gray-700 max-w-2xl mb-12 tracking-widest leading-relaxed">
+            在光影與虹彩交織的空間，<br>為您的髮絲注入流光色彩。
+        </p>
+        <a href="http://booking.hairweb.net" class="unicorn-btn px-16 py-4 text-sm uppercase inline-block rounded-full">立即線上預約</a>
+    </section>
+
+    <section id="intro" class="py-12 container mx-auto px-6 border-t-2 border-white">
         <div class="mb-10 text-center">
             <h3 class="text-3xl unicorn-text font-black mb-4">探索美學分類</h3>
-            <p class="text-gray-700 font-bold leading-relaxed mb-8">職人精神，從接待、造型到洗護的極致堅持。</p>
+            <p class="text-gray-700 font-bold leading-relaxed">職人精神的極致堅持</p>
         </div>
 
         <div class="space-y-4">
@@ -122,23 +123,19 @@
     <section id="portfolio" class="py-16 bg-white/50">
         <div class="container mx-auto px-2 text-center mb-8">
             <h2 class="text-3xl unicorn-text mb-2 font-black">Portfolio</h2>
-            <p class="text-purple-600 text-[10px] tracking-widest font-black uppercase">傑作系列</p>
         </div>
         
         <div class="flex flex-row gap-1 px-1 justify-center">
-            <div class="w-1/5"><img src="hair1.png" class="w-full aspect-[3/4] object-cover rounded-md border-2 border-white shadow-sm"></div>
-            <div class="w-1/5"><img src="hair2.png" class="w-full aspect-[3/4] object-cover rounded-md border-2 border-white shadow-sm"></div>
-            <div class="w-1/5"><img src="hair3.png" class="w-full aspect-[3/4] object-cover rounded-md border-2 border-white shadow-sm"></div>
-            <div class="w-1/5"><img src="hair4.png" class="w-full aspect-[3/4] object-cover rounded-md border-2 border-white shadow-sm"></div>
-            <div class="w-1/5"><img src="hair5.png" class="w-full aspect-[3/4] object-cover rounded-md border-2 border-white shadow-sm"></div>
+            <div class="w-1/5"><img src="hair1.png" class="w-full aspect-[3/4] object-cover rounded-md border-2 border-white"></div>
+            <div class="w-1/5"><img src="hair2.png" class="w-full aspect-[3/4] object-cover rounded-md border-2 border-white"></div>
+            <div class="w-1/5"><img src="hair3.png" class="w-full aspect-[3/4] object-cover rounded-md border-2 border-white"></div>
+            <div class="w-1/5"><img src="hair4.png" class="w-full aspect-[3/4] object-cover rounded-md border-2 border-white"></div>
+            <div class="w-1/5"><img src="hair5.png" class="w-full aspect-[3/4] object-cover rounded-md border-2 border-white"></div>
         </div>
     </section>
 
     <footer class="py-16 text-center px-6">
-        <a href="http://booking.hairweb.net" class="unicorn-btn w-full py-4 text-base uppercase inline-block rounded-xl shadow-lg">立即進入線上預約</a>
-        <div class="mt-10 text-[10px] text-purple-300 font-bold tracking-widest">
-            VITALITY BEAUTY © 2026<br>DESIGNED FOR CLIENTS
-        </div>
+        <p class="mt-4 text-[10px] text-purple-300 font-bold tracking-widest uppercase">VITALITY BEAUTY © 2026</p>
     </footer>
 
 </body>
