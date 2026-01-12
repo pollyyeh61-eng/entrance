@@ -38,15 +38,14 @@
         /* 電腦版 (螢幕大於 1024px) 特別調整 */
         @media (min-width: 1024px) {
             .salon-img-container {
-                height: 60vh; /* 電腦版圖片縮小高度，不佔滿全螢幕 */
-                width: 80%;   /* 寬度也稍微內縮，看起來更精緻 */
+                height: 60vh; 
+                width: 80%;   
                 margin: 0 auto;
-                border-radius: 30px; /* 增加一點圓角感 */
+                border-radius: 30px; 
                 box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             }
         }
 
-        /* 分類框架圖形化 */
         .category-card {
             position: relative;
             overflow: hidden;
@@ -76,21 +75,21 @@
             text-shadow: 0 2px 8px rgba(0,0,0,0.7);
         }
 
-        .unicorn-line { height: 3px; background: var(--unicorn-gradient); width: 80px; margin: 2rem auto; border-radius: 10px; }
+        .unicorn-line { height: 3px; background: var(--unicorn-gradient); width: 60px; margin: 2rem auto; border-radius: 10px; }
         .unicorn-btn { border: 2px solid #6C5CE7; background: white; color: #4834D4; font-weight: 700; transition: 0.3s; }
         .unicorn-btn:hover { background: var(--unicorn-gradient); color: white; border-color: transparent; }
     </style>
 </head>
 <body>
 
-    <section class="pt-32 pb-20 flex flex-col justify-center items-center text-center px-6">
-        <h2 class="text-sm tracking-[0.6em] text-purple-500 mb-6 font-black uppercase">Premium Beauty Experience</h2>
-        <h1 class="text-6xl md:text-8xl unicorn-text mb-8 italic font-extrabold">Holy Hair Salon</h1>
+    <section class="pt-40 pb-24 flex flex-col justify-center items-center text-center px-8">
+        <h2 class="text-[10px] tracking-[0.5em] text-purple-400 mb-6 font-black uppercase">Premium Beauty</h2>
+        <h1 class="text-4xl md:text-8xl unicorn-text mb-6 italic font-extrabold leading-tight">Holy Hair Salon</h1>
         <div class="unicorn-line"></div>
-        <p class="text-lg font-bold text-gray-700 max-w-2xl mb-12 tracking-widest leading-relaxed">
-            在光影與虹彩交織的空間，<br>為您的髮絲注入流光色彩，開啟您的尊榮蛻變之旅。
+        <p class="text-sm md:text-lg font-bold text-gray-500 max-w-xl mb-12 tracking-[0.15em] leading-relaxed">
+            在光影與虹彩交織的空間，<br>為您的髮絲注入流光色彩。
         </p>
-        <a href="http://booking.hairweb.net" class="unicorn-btn px-16 py-4 text-sm uppercase inline-block rounded-full shadow-lg">進入預約系統</a>
+        <a href="http://booking.hairweb.net" class="unicorn-btn px-12 py-3.5 text-xs uppercase inline-block rounded-full shadow-lg tracking-widest">進入預約系統</a>
     </section>
 
     <section class="salon-img-container">
@@ -99,8 +98,8 @@
 
     <section id="intro" class="py-24 container mx-auto px-8">
         <div class="text-center mb-16">
-            <h3 class="text-4xl unicorn-text font-black mb-4">探索美學分類</h3>
-            <p class="text-gray-700 font-bold text-lg">職人精神的極致堅持</p>
+            <h3 class="text-3xl md:text-4xl unicorn-text font-black mb-4">探索美學分類</h3>
+            <p class="text-gray-700 font-bold text-base md:text-lg">職人精神的極致堅持</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <a href="空間.html" class="category-card">
@@ -119,20 +118,20 @@
     </section>
 
     <section id="portfolio" class="py-24 bg-white/60">
-        <div class="container mx-auto px-8 text-center mb-12">
-            <h2 class="text-4xl unicorn-text mb-2 font-black">Portfolio</h2>
+        <div class="container mx-auto px-4 text-center mb-12">
+            <h2 class="text-3xl md:text-4xl unicorn-text mb-2 font-black">Portfolio</h2>
         </div>
-        <div class="flex flex-row gap-2 px-4 justify-center">
-            <img src="hair1.png" class="w-1/5 aspect-[3/4] object-cover rounded-xl shadow-md border-4 border-white">
-            <img src="hair2.png" class="w-1/5 aspect-[3/4] object-cover rounded-xl shadow-md border-4 border-white">
-            <img src="hair3.png" class="w-1/5 aspect-[3/4] object-cover rounded-xl shadow-md border-4 border-white">
-            <img src="hair4.png" class="w-1/5 aspect-[3/4] object-cover rounded-xl shadow-md border-4 border-white">
-            <img src="hair5.png" class="w-1/5 aspect-[3/4] object-cover rounded-xl shadow-md border-4 border-white">
+        <div class="flex flex-row gap-1.5 md:gap-3 px-2 md:px-10 justify-center">
+            <img src="hair1.png" class="w-1/5 aspect-[3/4] object-cover rounded-lg md:rounded-xl shadow-md border-2 md:border-4 border-white">
+            <img src="hair2.png" class="w-1/5 aspect-[3/4] object-cover rounded-lg md:rounded-xl shadow-md border-2 md:border-4 border-white">
+            <img src="hair3.png" class="w-1/5 aspect-[3/4] object-cover rounded-lg md:rounded-xl shadow-md border-2 md:border-4 border-white">
+            <img src="hair4.png" class="w-1/5 aspect-[3/4] object-cover rounded-lg md:rounded-xl shadow-md border-2 md:border-4 border-white">
+            <img src="hair5.png" class="w-1/5 aspect-[3/4] object-cover rounded-lg md:rounded-xl shadow-md border-2 md:border-4 border-white">
         </div>
     </section>
 
     <footer class="py-20 text-center">
-        <div class="text-xs text-purple-400 font-bold tracking-widest uppercase">
+        <div class="text-[10px] text-purple-300 font-bold tracking-[0.3em] uppercase">
             VITALITY BEAUTY © 2026. MAGIC REDEFINED.
         </div>
     </footer>
