@@ -116,7 +116,21 @@
         <p class="text-sm md:text-lg font-bold text-gray-500 max-w-xl mb-12 tracking-[0.15em] leading-relaxed">
             在光影與虹彩交織的空間，<br>為您的髮絲注入流光色彩。
         </p>
-        <a href="https://pollyyeh61-eng.github.io/MentorApp2.0/booking.html" class="unicorn-btn px-12 py-3.5 text-xs uppercase inline-block rounded-full shadow-lg tracking-widest">進入預約系統</a>
+        
+        <div class="flex flex-col items-center gap-4">
+            <a href="https://pollyyeh61-eng.github.io/MentorApp2.0/booking.html" class="unicorn-btn px-12 py-3.5 text-xs uppercase inline-block rounded-full shadow-lg tracking-widest">進入預約系統</a>
+
+            <div class="flex gap-4">
+                <button onclick="shareLink()" class="flex items-center gap-2 bg-white/80 px-5 py-2.5 rounded-full text-[11px] font-black text-purple-600 border border-purple-200 shadow-sm active:scale-95 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+                    推薦給好友
+                </button>
+                <button id="guest-download-btn" class="flex items-center gap-2 bg-purple-600 px-5 py-2.5 rounded-full text-[11px] font-black text-white shadow-md active:scale-95 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    下載 APP
+                </button>
+            </div>
+        </div>
     </section>
 
     <section class="salon-img-container">
@@ -198,8 +212,9 @@
             document.body.style.overflow = 'auto';
         }
 
-        // 3. 進階安裝邏輯 (支援 Android & iOS)
-        let deferredPrompt;
+        // 3. 整合後的安裝與分享邏輯
+        let myPrompt;
+        const guestDownloadBtn = document.getElementById('guest-download-btn');
         const installBtn = document.getElementById('install-btn');
         const installGuide = document.getElementById('install-guide');
 
@@ -208,39 +223,53 @@
         // 判斷是否已經在 App 模式中開啟
         const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
 
-        // 針對 Android/Chrome
+        // 監聽 Android/Chrome 安裝事件
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
-            deferredPrompt = e;
+            myPrompt = e;
+            // 如果是在手機瀏覽器且尚未安裝，顯示底部跳動標籤
             if (window.innerWidth <= 768 && !isStandalone) {
                 installGuide.style.display = 'flex';
             }
         });
 
-        // 針對 iOS (因為 iOS 不會觸發 beforeinstallprompt)
+        // 針對 iOS 兩秒後顯示底部跳動標籤
         window.addEventListener('load', () => {
             if (isIOS && window.innerWidth <= 768 && !isStandalone) {
                 setTimeout(() => {
                     installGuide.style.display = 'flex';
-                }, 2000); // 延遲兩秒顯示，增加美感
+                }, 2000);
             }
         });
 
-        if(installBtn) {
-            installBtn.addEventListener('click', async () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    const { outcome } = await deferredPrompt.userChoice;
-                    console.log(`User choice: ${outcome}`);
-                    deferredPrompt = null;
-                    installGuide.style.display = 'none';
-                } else {
-                    // iPhone 或不支援直接觸發時的提示
-                    alert("✨ 預約祕技：\n請點擊瀏覽器下方的『分享』按鈕 (正方形箭頭圖示)，然後選擇『加入主畫面』即可完成安裝！");
-                    installGuide.style.display = 'none';
-                }
-            });
+        // 分享功能按鈕
+        function shareLink() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Holy Hair Salon',
+                    text: '這間沙龍超讚，推薦給你！',
+                    url: window.location.href
+                });
+            } else {
+                alert("請複製網址分享：\n" + window.location.href);
+            }
         }
+
+        // 下載 APP 按鈕 (手動點擊邏輯)
+        const handleInstall = async () => {
+            if (myPrompt) {
+                myPrompt.prompt();
+                const { outcome } = await myPrompt.userChoice;
+                myPrompt = null;
+                installGuide.style.display = 'none';
+            } else {
+                alert("✨ 預約祕技：\niPhone 使用者請點擊瀏覽器下方的『分享』圖示 (正方形帶箭頭)，然後選擇『加入主畫面』即可安裝！");
+            }
+        };
+
+        if(guestDownloadBtn) guestDownloadBtn.addEventListener('click', handleInstall);
+        if(installBtn) installBtn.addEventListener('click', handleInstall);
+
     </script>
 </body>
 </html>
