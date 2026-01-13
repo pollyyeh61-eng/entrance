@@ -210,7 +210,22 @@
         </div>
         <button onclick="this.parentElement.style.display='none'" class="text-gray-400 text-lg">×</button>
     </div>
-
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    myPrompt = e;
+    if (window.innerWidth <= 768 && !isStandalone) {
+        installGuide.style.display = 'flex';
+        installGuide.classList.add('animate-slide-up'); // 加入動畫
+    }
+});
+window.addEventListener('load', () => {
+    if (isIOS && window.innerWidth <= 768 && !isStandalone) {
+        setTimeout(() => {
+            installGuide.style.display = 'flex';
+            installGuide.classList.add('animate-slide-up'); // 加入動畫
+        }, 2000);
+    }
+});
     <script>
         // 1. 註冊 Service Worker
         if ('serviceWorker' in navigator) {
@@ -288,5 +303,6 @@ if(installBtn) installBtn.addEventListener('click', handleInstall);
     </script>
 </body>
 </html>
+
 
 
