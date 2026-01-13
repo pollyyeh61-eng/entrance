@@ -23,23 +23,34 @@
         }
         body { background-color: var(--dream-bg); color: #2D3436; font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
         
-        /* 浮動標籤進場動畫 */
-        @keyframes slide-up-elastic {
-            0% { transform: translate(-50%, 150%); opacity: 0; }
-            60% { transform: translate(-50%, -20%); opacity: 1; }
-            80% { transform: translate(-50%, 5%); }
-            100% { transform: translate(-50%, 0); }
+        /* 1. 右側彈入動畫 */
+        @keyframes slide-in-right {
+            0% { transform: translate(150%, -50%); opacity: 0; }
+            60% { transform: translate(-10%, -50%); opacity: 1; }
+            100% { transform: translate(0, -50%); }
         }
 
-        .animate-slide-up {
-            animation: slide-up-elastic 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        .animate-slide-right {
+            animation: slide-in-right 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
+        /* 2. 右側小標籤樣式 */
         #install-guide {
+            position: fixed;
+            right: 0;           /* 貼齊右邊緣 */
+            top: 65%;           /* 螢幕 2/3 處 */
+            transform: translateY(-50%);
+            width: 130px;       /* 寬度縮小，適合側面 */
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border: 1.5px solid rgba(108, 92, 231, 0.2);
-            box-shadow: 0 10px 40px rgba(108, 92, 231, 0.2);
+            border: 1.5px solid rgba(108, 92, 231, 0.3);
+            border-right: none; /* 右邊不留邊框更貼合 */
+            box-shadow: -5px 5px 20px rgba(108, 92, 231, 0.15);
+            border-radius: 20px 0 0 20px; /* 只有左側圓角 */
+            padding: 12px 10px 12px 15px;
+            z-index: 1000;
+            display: none;      /* 初始隱藏 */
+            align-items: center;
         }
 
         .unicorn-text { 
@@ -50,10 +61,7 @@
             filter: drop-shadow(0 2px 2px rgba(255, 255, 255, 0.8));
         }
 
-        .salon-img-container {
-            width: 100%; height: 100vh;
-            overflow: hidden; display: flex; justify-content: center;
-        }
+        .salon-img-container { width: 100%; height: 100vh; overflow: hidden; display: flex; justify-content: center; }
         .salon-img-container img { width: 100%; height: 100%; object-fit: cover; }
 
         @media (min-width: 1024px) {
@@ -106,15 +114,18 @@
         </div>
     </section>
 
-    <section class="salon-img-container">
-        <img src="沙龍.png" alt="Salon Interior">
-    </section>
-
-    <section id="intro" class="py-24 container mx-auto px-8">
-        <div class="text-center mb-16">
-            <h3 class="text-3xl md:text-4xl unicorn-text font-black mb-4">探索美學分類</h3>
-            <p class="text-gray-700 font-bold text-base md:text-lg">職人精神的極致堅持</p>
+    <div id="install-guide" class="md:hidden">
+        <div id="install-btn" class="text-[11px] font-black text-gray-700 cursor-pointer leading-tight">
+             <span class="text-purple-600">✨點我安裝</span><br>預約更方便
         </div>
+        <button onclick="this.parentElement.style.display='none'" class="absolute -top-2 -left-2 bg-white text-gray-400 border border-gray-100 rounded-full w-5 h-5 text-[10px] flex items-center justify-center shadow-sm">×</button>
+    </div>
+
+    <section class="salon-img-container"><img src="沙龍.png" alt="Salon Interior"></section>
+
+    <section id="intro" class="py-24 container mx-auto px-8 text-center">
+        <h3 class="text-3xl md:text-4xl unicorn-text font-black mb-4">探索美學分類</h3>
+        <p class="text-gray-700 font-bold text-base md:text-lg mb-12">職人精神的極致堅持</p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <a href="空間.html" class="category-card"><img src="接待區.png" alt="接待區"><span>美學空間</span></a>
             <a href="造型.html" class="category-card"><img src="造型.png" alt="造型"><span>大師造型</span></a>
@@ -122,17 +133,15 @@
         </div>
     </section>
 
-    <section id="portfolio" class="py-24 bg-white/60">
-        <div class="container mx-auto px-4 text-center mb-12">
-            <h2 class="text-3xl md:text-4xl unicorn-text mb-2 font-black">Portfolio</h2>
-            <p class="text-[10px] text-gray-400 font-bold tracking-widest">點擊圖片查看細節</p>
-        </div>
+    <section id="portfolio" class="py-24 bg-white/60 text-center">
+        <h2 class="text-3xl md:text-4xl unicorn-text mb-2 font-black">Portfolio</h2>
+        <p class="text-[10px] text-gray-400 font-bold tracking-widest mb-12">點擊圖片查看細節</p>
         <div class="flex flex-row gap-1.5 md:gap-3 px-2 md:px-10 justify-center">
-            <img src="hair1.png" onclick="openLightbox(this.src)" class="portfolio-img w-1/5 aspect-[3/4] object-cover rounded-lg md:rounded-xl shadow-md border-2 md:border-4 border-white">
-            <img src="hair2.png" onclick="openLightbox(this.src)" class="portfolio-img w-1/5 aspect-[3/4] object-cover rounded-lg md:rounded-xl shadow-md border-2 md:border-4 border-white">
-            <img src="hair3.png" onclick="openLightbox(this.src)" class="portfolio-img w-1/5 aspect-[3/4] object-cover rounded-lg md:rounded-xl shadow-md border-2 md:border-4 border-white">
-            <img src="hair4.png" onclick="openLightbox(this.src)" class="portfolio-img w-1/5 aspect-[3/4] object-cover rounded-lg md:rounded-xl shadow-md border-2 md:border-4 border-white">
-            <img src="hair5.png" onclick="openLightbox(this.src)" class="portfolio-img w-1/5 aspect-[3/4] object-cover rounded-lg md:rounded-xl shadow-md border-2 md:border-4 border-white">
+            <img src="hair1.png" onclick="openLightbox(this.src)" class="portfolio-img w-1/5 aspect-[3/4] object-cover rounded-lg shadow-md border-2 border-white">
+            <img src="hair2.png" onclick="openLightbox(this.src)" class="portfolio-img w-1/5 aspect-[3/4] object-cover rounded-lg shadow-md border-2 border-white">
+            <img src="hair3.png" onclick="openLightbox(this.src)" class="portfolio-img w-1/5 aspect-[3/4] object-cover rounded-lg shadow-md border-2 border-white">
+            <img src="hair4.png" onclick="openLightbox(this.src)" class="portfolio-img w-1/5 aspect-[3/4] object-cover rounded-lg shadow-md border-2 border-white">
+            <img src="hair5.png" onclick="openLightbox(this.src)" class="portfolio-img w-1/5 aspect-[3/4] object-cover rounded-lg shadow-md border-2 border-white">
         </div>
     </section>
 
@@ -144,58 +153,41 @@
 
     <div id="lightbox" onclick="closeLightbox()"><img id="lightbox-img" src="" alt="Large View"></div>
 
-    <div id="install-guide" class="fixed bottom-10 left-1/2 -translate-x-1/2 px-6 py-4 rounded-2xl z-[1000] flex items-center gap-4 md:hidden" style="display: none;">
-        <div id="install-btn" class="text-xs font-bold text-gray-600 cursor-pointer">
-              點擊 <span class="text-purple-600">"安裝 App 到桌面"</span><br>預約專屬髮型師更方便！
-        </div>
-        <button onclick="this.parentElement.style.display='none'" class="text-gray-400 text-lg">×</button>
-    </div>
-
     <script>
-        // 1. 註冊 Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then(reg => console.log('SW OK')).catch(err => console.log('SW Fail'));
             });
         }
 
-        // 2. 燈箱功能
         function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
         function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
-       // 3. 整合後的安裝與分享邏輯
         let myPrompt = null;
         const guestDownloadBtn = document.getElementById('guest-download-btn');
         const installBtn = document.getElementById('install-btn');
         const installGuide = document.getElementById('install-guide');
 
-        // 判斷環境
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
         const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
 
-        // 【核心修改：強制顯示邏輯】
         function showGuide() {
             if (!isStandalone && window.innerWidth <= 768) {
                 installGuide.style.display = 'flex';
-                installGuide.classList.remove('animate-bounce'); // 移除舊動畫
-                installGuide.classList.add('animate-slide-up');  // 加入果凍動畫
-                console.log("引導標籤已強制彈出");
+                installGuide.classList.add('animate-slide-right');
             }
         }
 
-        // 1. Android 準備好時顯示
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             myPrompt = e;
             showGuide();
         });
 
-        // 2. 網頁載入 2 秒後，不論 Android/iOS 都強制顯示 (確保萬無一失)
         window.addEventListener('load', () => {
             setTimeout(showGuide, 2000);
         });
 
-        // 分享功能
         function shareLink() {
             if (navigator.share) {
                 navigator.share({ title: 'Holy Hair Salon', text: '這間沙龍超讚，推薦給你！', url: window.location.href });
@@ -204,19 +196,16 @@
             }
         }
 
-        // 安裝功能按鈕邏輯
         const handleInstall = async () => {
             if (myPrompt) {
                 myPrompt.prompt();
-                const { outcome } = await myPrompt.userChoice;
+                await myPrompt.userChoice;
                 myPrompt = null;
                 installGuide.style.display = 'none';
             } else if (isIOS) {
                 alert("✨ iPhone 預約祕技：\n請點擊瀏覽器下方中央的『分享』圖示 (正方形帶箭頭)，往下滑找到並選擇『加入主畫面』即可！");
-                installGuide.style.display = 'none';
             } else {
-                // 如果是 Android 但 myPrompt 沒抓到
-                alert("✨ 預約祕技：\n請點擊瀏覽器右上角『⋮』選單中的『安裝應用程式』或『新增至主畫面』，預約更方便！");
+                alert("✨ 預約祕技：\n請點擊瀏覽器右上角『⋮』選單中的『安裝應用程式』，預約更方便！");
                 installGuide.style.display = 'none';
             }
         };
@@ -226,4 +215,3 @@
     </script>
 </body>
 </html>
-
