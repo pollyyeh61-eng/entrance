@@ -163,36 +163,39 @@
         function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
         function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
-        // 3. 整合後的安裝與分享邏輯
+       // 3. 整合後的安裝與分享邏輯
         let myPrompt = null;
         const guestDownloadBtn = document.getElementById('guest-download-btn');
         const installBtn = document.getElementById('install-btn');
         const installGuide = document.getElementById('install-guide');
 
+        // 判斷環境
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
         const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
 
-        // 監聽 Android 安裝事件
+        // 【核心修改：強制顯示邏輯】
+        function showGuide() {
+            if (!isStandalone && window.innerWidth <= 768) {
+                installGuide.style.display = 'flex';
+                installGuide.classList.remove('animate-bounce'); // 移除舊動畫
+                installGuide.classList.add('animate-slide-up');  // 加入果凍動畫
+                console.log("引導標籤已強制彈出");
+            }
+        }
+
+        // 1. Android 準備好時顯示
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             myPrompt = e;
-            if (window.innerWidth <= 768 && !isStandalone) {
-                installGuide.style.display = 'flex';
-                installGuide.classList.add('animate-slide-up');
-            }
+            showGuide();
         });
 
-        // 針對 iOS 延遲顯示
+        // 2. 網頁載入 2 秒後，不論 Android/iOS 都強制顯示 (確保萬無一失)
         window.addEventListener('load', () => {
-            if (isIOS && window.innerWidth <= 768 && !isStandalone) {
-                setTimeout(() => {
-                    installGuide.style.display = 'flex';
-                    installGuide.classList.add('animate-slide-up');
-                }, 2000);
-            }
+            setTimeout(showGuide, 2000);
         });
 
-        // 分享按鈕
+        // 分享功能
         function shareLink() {
             if (navigator.share) {
                 navigator.share({ title: 'Holy Hair Salon', text: '這間沙龍超讚，推薦給你！', url: window.location.href });
@@ -201,17 +204,20 @@
             }
         }
 
-        // 安裝邏輯
+        // 安裝功能按鈕邏輯
         const handleInstall = async () => {
             if (myPrompt) {
                 myPrompt.prompt();
-                await myPrompt.userChoice;
+                const { outcome } = await myPrompt.userChoice;
                 myPrompt = null;
                 installGuide.style.display = 'none';
             } else if (isIOS) {
                 alert("✨ iPhone 預約祕技：\n請點擊瀏覽器下方中央的『分享』圖示 (正方形帶箭頭)，往下滑找到並選擇『加入主畫面』即可！");
+                installGuide.style.display = 'none';
             } else {
-                alert("✨ 安裝提示：\n若您使用 Android，請稍候 3 秒再試一次，或點選瀏覽器右上角『⋮』選單中的『安裝應用程式』。");
+                // 如果是 Android 但 myPrompt 沒抓到
+                alert("✨ 預約祕技：\n請點擊瀏覽器右上角『⋮』選單中的『安裝應用程式』或『新增至主畫面』，預約更方便！");
+                installGuide.style.display = 'none';
             }
         };
 
@@ -220,3 +226,4 @@
     </script>
 </body>
 </html>
+
