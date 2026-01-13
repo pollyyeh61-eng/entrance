@@ -16,33 +16,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <style
-        /* 浮動標籤進場動畫 */
-@keyframes slide-up-elastic {
-    0% { transform: translate(-50%, 150%); opacity: 0; }
-    60% { transform: translate(-50%, -20%); opacity: 1; }
-    80% { transform: translate(-50%, 5%); }
-    100% { transform: translate(-50%, 0); }
-}
-
-/* 讓標籤使用動畫 */
-.animate-slide-up {
-    animation: slide-up-elastic 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-/* 微調引導標籤的基礎樣式，增加高級感 */
-#install-guide {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border: 1.5px solid rgba(108, 92, 231, 0.2);
-    box-shadow: 0 10px 40px rgba(108, 92, 231, 0.2);
-}
+    <style>
         :root {
             --unicorn-gradient: linear-gradient(45deg, #FF99F1, #A29BFE, #6C5CE7, #81ECEC);
             --dream-bg: #F0F2F8; 
         }
         body { background-color: var(--dream-bg); color: #2D3436; font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
         
+        /* 浮動標籤進場動畫 */
+        @keyframes slide-up-elastic {
+            0% { transform: translate(-50%, 150%); opacity: 0; }
+            60% { transform: translate(-50%, -20%); opacity: 1; }
+            80% { transform: translate(-50%, 5%); }
+            100% { transform: translate(-50%, 0); }
+        }
+
+        .animate-slide-up {
+            animation: slide-up-elastic 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        #install-guide {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1.5px solid rgba(108, 92, 231, 0.2);
+            box-shadow: 0 10px 40px rgba(108, 92, 231, 0.2);
+        }
+
         .unicorn-text { 
             background: var(--unicorn-gradient); 
             -webkit-background-clip: text; 
@@ -52,77 +51,32 @@
         }
 
         .salon-img-container {
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
+            width: 100%; height: 100vh;
+            overflow: hidden; display: flex; justify-content: center;
         }
-        .salon-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .salon-img-container img { width: 100%; height: 100%; object-fit: cover; }
 
         @media (min-width: 1024px) {
-            .salon-img-container {
-                height: 60vh; 
-                width: 80%;   
-                margin: 0 auto;
-                border-radius: 30px; 
-                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            }
+            .salon-img-container { height: 60vh; width: 80%; margin: 0 auto; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         }
 
         .category-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 4px solid white;
-            box-shadow: 0 8px 15px rgba(108, 92, 231, 0.15);
+            position: relative; overflow: hidden; border-radius: 20px; height: 200px;
+            display: flex; align-items: center; justify-content: center;
+            border: 4px solid white; box-shadow: 0 8px 15px rgba(108, 92, 231, 0.15);
         }
-        .category-card img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-            filter: brightness(0.65);
-        }
-        .category-card span {
-            position: relative;
-            z-index: 2;
-            color: white;
-            font-weight: 900;
-            font-size: 1.5rem;
-            letter-spacing: 0.2em;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
-        }
+        .category-card img { position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: 1; filter: brightness(0.65); }
+        .category-card span { position: relative; z-index: 2; color: white; font-weight: 900; font-size: 1.5rem; letter-spacing: 0.2em; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
 
         .unicorn-line { height: 3px; background: var(--unicorn-gradient); width: 60px; margin: 2rem auto; border-radius: 10px; }
         .unicorn-btn { border: 2px solid #6C5CE7; background: white; color: #4834D4; font-weight: 700; transition: 0.3s; text-align: center; }
         .unicorn-btn:hover { background: var(--unicorn-gradient); color: white; border-color: transparent; }
 
         #lightbox {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            display: none; position: fixed; z-index: 999; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9); justify-content: center; align-items: center; padding: 20px;
         }
-        #lightbox img {
-            max-width: 100%;
-            max-height: 80vh;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(255, 153, 241, 0.3);
-        }
+        #lightbox img { max-width: 100%; max-height: 80vh; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 153, 241, 0.3); }
         .portfolio-img { cursor: pointer; transition: transform 0.2s; }
         .portfolio-img:active { transform: scale(0.95); }
     </style>
@@ -139,7 +93,6 @@
         
         <div class="flex flex-col items-center gap-4">
             <a href="https://pollyyeh61-eng.github.io/MentorApp2.0/booking.html" class="unicorn-btn px-12 py-3.5 text-xs uppercase inline-block rounded-full shadow-lg tracking-widest">進入預約系統</a>
-
             <div class="flex gap-4">
                 <button onclick="shareLink()" class="flex items-center gap-2 bg-white/80 px-5 py-2.5 rounded-full text-[11px] font-black text-purple-600 border border-purple-200 shadow-sm active:scale-95 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
@@ -163,18 +116,9 @@
             <p class="text-gray-700 font-bold text-base md:text-lg">職人精神的極致堅持</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <a href="空間.html" class="category-card">
-                <img src="接待區.png" alt="接待區">
-                <span>美學空間</span>
-            </a>
-            <a href="造型.html" class="category-card">
-                <img src="造型.png" alt="造型">
-                <span>大師造型</span>
-            </a>
-            <a href="洗髮.html" class="category-card">
-                <img src="洗髮.png" alt="洗髮">
-                <span>極致洗髮</span>
-            </a>
+            <a href="空間.html" class="category-card"><img src="接待區.png" alt="接待區"><span>美學空間</span></a>
+            <a href="造型.html" class="category-card"><img src="造型.png" alt="造型"><span>大師造型</span></a>
+            <a href="洗髮.html" class="category-card"><img src="洗髮.png" alt="洗髮"><span>極致洗髮</span></a>
         </div>
     </section>
 
@@ -195,114 +139,84 @@
     <footer class="py-24 text-center px-8 bg-white/40">
         <h3 class="text-xl unicorn-text font-black mb-8 tracking-widest">RESERVE YOUR DREAM</h3>
         <a href="https://pollyyeh61-eng.github.io/MentorApp2.0/booking.html" class="unicorn-btn px-16 py-4 text-sm uppercase inline-block rounded-full shadow-xl tracking-widest">立即線上預約</a>
-        <div class="mt-16 text-[10px] text-purple-300 font-bold tracking-[0.3em] uppercase">
-            VITALITY BEAUTY © 2026. MAGIC REDEFINED.
-        </div>
+        <div class="mt-16 text-[10px] text-purple-300 font-bold tracking-[0.3em] uppercase">VITALITY BEAUTY © 2026. MAGIC REDEFINED.</div>
     </footer>
 
-    <div id="lightbox" onclick="closeLightbox()">
-        <img id="lightbox-img" src="" alt="Large View">
-    </div>
+    <div id="lightbox" onclick="closeLightbox()"><img id="lightbox-img" src="" alt="Large View"></div>
 
-    <div id="install-guide" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md px-6 py-4 rounded-2xl shadow-2xl z-[1000] flex items-center gap-4 border border-purple-200 animate-bounce md:hidden" style="display: none;">
+    <div id="install-guide" class="fixed bottom-10 left-1/2 -translate-x-1/2 px-6 py-4 rounded-2xl z-[1000] flex items-center gap-4 md:hidden" style="display: none;">
         <div id="install-btn" class="text-xs font-bold text-gray-600 cursor-pointer">
               點擊 <span class="text-purple-600">"安裝 App 到桌面"</span><br>預約專屬髮型師更方便！
         </div>
         <button onclick="this.parentElement.style.display='none'" class="text-gray-400 text-lg">×</button>
     </div>
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    myPrompt = e;
-    if (window.innerWidth <= 768 && !isStandalone) {
-        installGuide.style.display = 'flex';
-        installGuide.classList.add('animate-slide-up'); // 加入動畫
-    }
-});
-window.addEventListener('load', () => {
-    if (isIOS && window.innerWidth <= 768 && !isStandalone) {
-        setTimeout(() => {
-            installGuide.style.display = 'flex';
-            installGuide.classList.add('animate-slide-up'); // 加入動畫
-        }, 2000);
-    }
-});
+
     <script>
         // 1. 註冊 Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('Service Worker 註冊成功！'))
-                    .catch(err => console.log('Service Worker 註冊失敗：', err));
+                navigator.serviceWorker.register('sw.js').then(reg => console.log('SW OK')).catch(err => console.log('SW Fail'));
             });
         }
 
         // 2. 燈箱功能
-        function openLightbox(src) {
-            document.getElementById('lightbox-img').src = src;
-            document.getElementById('lightbox').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+        function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+        function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+        // 3. 整合後的安裝與分享邏輯
+        let myPrompt = null;
+        const guestDownloadBtn = document.getElementById('guest-download-btn');
+        const installBtn = document.getElementById('install-btn');
+        const installGuide = document.getElementById('install-guide');
+
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
+        // 監聽 Android 安裝事件
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            myPrompt = e;
+            if (window.innerWidth <= 768 && !isStandalone) {
+                installGuide.style.display = 'flex';
+                installGuide.classList.add('animate-slide-up');
+            }
+        });
+
+        // 針對 iOS 延遲顯示
+        window.addEventListener('load', () => {
+            if (isIOS && window.innerWidth <= 768 && !isStandalone) {
+                setTimeout(() => {
+                    installGuide.style.display = 'flex';
+                    installGuide.classList.add('animate-slide-up');
+                }, 2000);
+            }
+        });
+
+        // 分享按鈕
+        function shareLink() {
+            if (navigator.share) {
+                navigator.share({ title: 'Holy Hair Salon', text: '這間沙龍超讚，推薦給你！', url: window.location.href });
+            } else {
+                alert("請複製網址分享：\n" + window.location.href);
+            }
         }
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
 
-// 3. 整合後的安裝與分享邏輯
-let myPrompt = null;
-const guestDownloadBtn = document.getElementById('guest-download-btn');
-const installBtn = document.getElementById('install-btn');
-const installGuide = document.getElementById('install-guide');
+        // 安裝邏輯
+        const handleInstall = async () => {
+            if (myPrompt) {
+                myPrompt.prompt();
+                await myPrompt.userChoice;
+                myPrompt = null;
+                installGuide.style.display = 'none';
+            } else if (isIOS) {
+                alert("✨ iPhone 預約祕技：\n請點擊瀏覽器下方中央的『分享』圖示 (正方形帶箭頭)，往下滑找到並選擇『加入主畫面』即可！");
+            } else {
+                alert("✨ 安裝提示：\n若您使用 Android，請稍候 3 秒再試一次，或點選瀏覽器右上角『⋮』選單中的『安裝應用程式』。");
+            }
+        };
 
-const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
-
-// 監聽 Android/Chrome 安裝事件
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    myPrompt = e; // 成功抓到 Android 安裝權限
-    
-    console.log("✅ Android 安裝權限已就緒");
-    
-    // 如果抓到了，自動顯示底部引導標籤（Android 專屬）
-    if (window.innerWidth <= 768 && !isStandalone) {
-        installGuide.style.display = 'flex';
-    }
-});
-
-// 下載 APP 按鈕的核心邏輯
-const handleInstall = async () => {
-    if (myPrompt) {
-        // 【Android 執行區】
-        myPrompt.prompt();
-        const { outcome } = await myPrompt.userChoice;
-        console.log(`使用者安裝選擇: ${outcome}`);
-        myPrompt = null; // 執行後清空
-        installGuide.style.display = 'none';
-    } else if (isIOS) {
-        // 【iOS 執行區】
-        alert("✨ iPhone 預約祕技：\n請點擊瀏覽器下方中央的『分享』圖示 (正方形帶箭頭)，往下滑找到並選擇『加入主畫面』即可！");
-        installGuide.style.display = 'none';
-    } else {
-        // 【還沒準備好或已安裝】
-        alert("✨ 安裝提示：\n若您使用 Android，請稍候 3 秒再試一次，或點選瀏覽器右上角『⋮』選單中的『安裝應用程式』。");
-    }
-};
-
-// 針對 iOS 延遲顯示引導標籤
-window.addEventListener('load', () => {
-    if (isIOS && window.innerWidth <= 768 && !isStandalone) {
-        setTimeout(() => {
-            installGuide.style.display = 'flex';
-        }, 2000);
-    }
-});
-
-if(guestDownloadBtn) guestDownloadBtn.addEventListener('click', handleInstall);
-if(installBtn) installBtn.addEventListener('click', handleInstall);
-
+        if(guestDownloadBtn) guestDownloadBtn.addEventListener('click', handleInstall);
+        if(installBtn) installBtn.addEventListener('click', handleInstall);
     </script>
 </body>
 </html>
-
-
-
