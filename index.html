@@ -218,24 +218,9 @@ function shareLink() {
             }
         }
 
-        // --- 智能預約分流邏輯 ---
-        window.addEventListener('load', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const version = urlParams.get('v');
-            let bookingUrl = "https://pollyyeh61-eng.github.io/MentorApp2.0/booking.html";
-
-            if (version === '1') {
-                bookingUrl = "https://pollyyeh61-eng.github.io/MentorApp1/booking.html";
-                console.log("已切換為 Mentor 1.0 預約簿");
-            }
-
-            const allBookingButtons = document.querySelectorAll('a[href*="booking.html"]');
-            allBookingButtons.forEach(btn => {
-                btn.href = bookingUrl;
-            });
-        });  
     </script>
 </body>
 </html>
+
 
 
