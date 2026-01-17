@@ -210,33 +210,32 @@
             }
         };
 
-        if(guestDownloadBtn) guestDownloadBtn.addEventListener('click', handleInstall);
-        if(installBtn) installBtn.addEventListener('click', handleInstall);
+function shareLink() {
+            if (navigator.share) {
+                navigator.share({ title: 'Holy Hair Salon', text: '這間沙龍超讚！', url: window.location.href });
+            } else {
+                alert("請複製網址分享：\n" + window.location.href);
             }
-        };
-     // --- 智能預約分流邏輯 ---
-window.addEventListener('load', () => {
-    // 1. 取得網址參數 (例如 ?v=1)
-    const urlParams = new URLSearchParams(window.location.search);
-    const version = urlParams.get('v');
+        }
 
-    // 2. 定義預約目標網址
-    let bookingUrl = "https://pollyyeh61-eng.github.io/MentorApp2.0/booking.html"; // 預設 2.0
+        // --- 智能預約分流邏輯 ---
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const version = urlParams.get('v');
+            let bookingUrl = "https://pollyyeh61-eng.github.io/MentorApp2.0/booking.html";
 
-    if (version === '1') {
-        // 如果偵測到 v=1，則指向 1.0 的預約簿
-        bookingUrl = "https://pollyyeh61-eng.github.io/MentorApp1/booking.html";
-        console.log("偵測到來自 Mentor 1.0 的請求，已自動切換預約簿路徑。");
-    }
+            if (version === '1') {
+                bookingUrl = "https://pollyyeh61-eng.github.io/MentorApp1/booking.html";
+                console.log("已切換為 Mentor 1.0 預約簿");
+            }
 
-    // 3. 自動更新頁面上所有預約按鈕的連結
-    // 這會同時修改「進入預約系統」按鈕與頁尾的「立即線上預約」按鈕
-    const allBookingButtons = document.querySelectorAll('a[href*="booking.html"]');
-    allBookingButtons.forEach(btn => {
-        btn.href = bookingUrl;
-    });
-});   
+            const allBookingButtons = document.querySelectorAll('a[href*="booking.html"]');
+            allBookingButtons.forEach(btn => {
+                btn.href = bookingUrl;
+            });
+        });  
     </script>
 </body>
 </html>
+
 
